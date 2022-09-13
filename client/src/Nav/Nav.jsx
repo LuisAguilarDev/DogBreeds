@@ -11,7 +11,7 @@ const Nav = (props) => {
           <img className={s.img} src={logo} alt="Not Found" />
         </div>
         <div>
-          <h6 className={s.pagename}>DogBreeds</h6>
+          <h6 className={s.pagename}>Dog Breeds</h6>
         </div>
       </div>
       <div>
