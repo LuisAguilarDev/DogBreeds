@@ -1,9 +1,12 @@
-import './App.css';
+import "./App.css";
+import Nav from "./Nav/Nav.jsx";
+require("dotenv").config({ path: "../../.env" });
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Dogs</h1>
+    <div>
+      <Nav />
+      <h1>Components</h1>
     </div>
   );
 }
