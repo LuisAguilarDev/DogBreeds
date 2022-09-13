@@ -27,6 +27,22 @@
   margin-left: -400px;
 }
 
+.links {
+  display: flex;
+  flex-direction: row;
+  padding: 24px;
+  color: white;
+  font-family: "Lato", sans-serif;
+  justify-content: space-around;
+  border: 24px;
+  font-size: 32px;
+}
+.home:hover {
+  color: yellow;
+}
+.home {
+  margin: 8px;
+}
 .pagename {
   font-size: 64px;
   padding: 8px;
@@ -46,12 +62,11 @@
 }
 
 .iconcont:hover {
-  background-color: rgb(241, 167, 56);
+  background-color: rgb(214, 214, 6);
 }
 
 .icon {
   height: 32px;
-  background-color: rgb(216, 152, 56);
 }
 
 @media (max-width: 1425px) {

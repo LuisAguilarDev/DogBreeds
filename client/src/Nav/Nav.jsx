@@ -25,7 +25,10 @@ const Nav = (props) => {
           <img className={s.icon} src={mg} alt="Not Found" />
         </button>
       </div>
-      <div></div>
+      <div className={s.links}>
+        <div className={s.home}>Home</div>
+        <div className={s.home}>Create Breed</div>
+      </div>
     </nav>
   );
 };
