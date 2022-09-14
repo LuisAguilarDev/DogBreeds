@@ -5,25 +5,26 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: "compositeIndex",
     },
-    description: {
-      type: DataTypes.TEXT,
+    life_span: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    mana_cost: {
+    alt_names: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    origin: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    weight: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      unique: "compositeIndex",
-      validate: {
-        min: 10.0,
-        max: 250.0,
-      },
     },
-    summary: {
-      type: DataTypes.VIRTUAL,
-      get() {
-        return `${this.name} (${this.mana_cost} points of mana) - Description: ${this.description}`;
-      },
+    height: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
     },
   });
 };

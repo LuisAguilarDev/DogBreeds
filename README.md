@@ -1,2 +1,3 @@
-# DogFinder
-Seach, love and create cute dogs
+# DogBreeds
+
+Seach, love and create breeds
