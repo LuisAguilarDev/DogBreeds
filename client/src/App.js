@@ -1,6 +1,6 @@
 import "./App.css";
-import Nav from "./Nav/Nav.jsx";
-import GlobalContainer from "./GlobalContainer/GlobalContainer";
+import Nav from "./components/Nav/Nav.jsx";
+import GlobalContainer from "./components/GlobalContainer/GlobalContainer";
 require("dotenv").config({ path: "../../.env" });
 
 function App() {

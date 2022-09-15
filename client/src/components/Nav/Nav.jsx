@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Nav.module.css";
-import logo from "./../resources/threedogs.png";
-import mg from "./../resources/MG.png";
+import logo from "./../../assets/threedogs.png";
+import mg from "./../../assets/MG.png";
 
 const Nav = (props) => {
   return (

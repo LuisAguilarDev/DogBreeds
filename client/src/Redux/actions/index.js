@@ -1,10 +1,10 @@
+const axios = require("axios").default;
+
 export function getBreeds() {
-  return function (dispatch) {
-    return fetch(`http://api.thedogapi.com/v1/breeds`)
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch({ type: "getBreeds", payload: data });
-      });
+  return async function (dispatch) {
+    return await axios.get(`http://localhost:3001/dogs`).then((response) => {
+      dispatch({ type: "getBreeds", payload: response });
+    });
   };
 }
 // export function getMovieDetail(idMovie) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, connect } from "react-redux";
-import * as actionCreators from "../redux/actions/index.js";
+import * as actionCreators from "../../redux/actions/index.js";
 import BreedCard from "./../BreedDetail/BreedDetail.jsx";
 import s from "./Breed.module.css";
 
