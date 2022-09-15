@@ -1,0 +1,24 @@
+.nomostra {
+  display: none;
+  background-color: red;
+}
+
+.display {
+  position: absolute;
+  right: 0px;
+  background-color: #966f33;
+  display: flex;
+  margin: 8px;
+  padding: 2px;
+  border-radius: 10px;
+}
+
+.select {
+  align-items: center;
+  margin-top: -80px;
+}
+
+.displayName {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+}
