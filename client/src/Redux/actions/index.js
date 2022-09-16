@@ -2,8 +2,9 @@ const axios = require("axios").default;
 
 export function getBreeds() {
   return async function (dispatch) {
+    console.log("mecalcule");
     return await axios.get(`http://localhost:3001/dogs`).then((response) => {
-      dispatch({ type: "getBreeds", payload: response });
+      dispatch({ type: "getBreeds", payload: response.data });
     });
   };
 }

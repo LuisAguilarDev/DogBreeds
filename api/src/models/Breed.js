@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  sequelize.define("Breed", {
+  sequelize.define("breed", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -10,20 +10,16 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    alt_names: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    origin: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     weight: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     height: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    img: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   });

@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export default function rootReducer(state = initialState, action) {
-  // console.log(action.payload);
   if (action.type === "getBreeds") {
     return {
       ...state,

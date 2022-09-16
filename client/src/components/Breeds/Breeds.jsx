@@ -1,19 +1,15 @@
-import React from "react";
-import { useState } from "react";
-import { useDispatch, connect } from "react-redux";
+import { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import * as actionCreators from "../../redux/actions/index.js";
 import BreedCard from "./../BreedDetail/BreedDetail.jsx";
 import s from "./Breed.module.css";
 
 const Breeds = (props) => {
-  const dispatch = useDispatch();
-
   useState(() => {
-    dispatch(actionCreators.getBreeds());
+    console.log("entre");
+    props.getBreeds();
   }, []);
 
-  //   setTimeout(console.log(this.props), 3000);
-  //   if (this.state.breeds) return <div>Hola</div>;
   return (
     <div className={s.panel}>
       <div className={s.container}>
