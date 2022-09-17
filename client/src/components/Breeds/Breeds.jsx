@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+// import { useState } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../redux/actions/index.js";
 import BreedCard from "./../BreedDetail/BreedDetail.jsx";
 import s from "./Breed.module.css";
 
 const Breeds = (props) => {
-  useState(() => {
-    console.log("entre");
-    props.getBreeds();
-  }, []);
+  // useState(() => {
+  //   console.log("entre");
+  //   props.getBreeds();
+  // }, []);
 
   return (
     <div className={s.panel}>
@@ -17,9 +17,9 @@ const Breeds = (props) => {
           return (
             <BreedCard
               key={b.id}
-              img={b.image.url}
+              img={b.img}
               name={b.name}
-              temper={b.temperament}
+              temper={b.tempers}
             />
           );
         })}

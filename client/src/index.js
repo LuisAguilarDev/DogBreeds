@@ -5,6 +5,9 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store/index.js";
+// import * as actionCreators from "./redux/actions";
+
+// store.dispatch(actionCreators);
 
 ReactDOM.render(
   <Provider store={store}>

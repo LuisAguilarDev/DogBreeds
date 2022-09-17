@@ -1,10 +1,11 @@
 const axios = require("axios").default;
 
 export function getBreeds() {
-  return async function (dispatch) {
+  return function (dispatch) {
     console.log("mecalcule");
-    return await axios.get(`http://localhost:3001/dogs`).then((response) => {
-      dispatch({ type: "getBreeds", payload: response.data });
+    axios.get(`http://localhost:3001/dogs`).then(async (response) => {
+      const apiResponse = await response.data;
+      dispatch({ type: "getBreeds", payload: apiResponse });
     });
   };
 }

@@ -5,6 +5,7 @@ const initialState = {
 };
 
 export default function rootReducer(state = initialState, action) {
+  console.log("entre al estado de redux con", action.payload);
   if (action.type === "getBreeds") {
     return {
       ...state,
