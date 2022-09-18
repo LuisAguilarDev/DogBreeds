@@ -2,8 +2,22 @@ import React from "react";
 import s from "./Nav.module.css";
 import logo from "./../../assets/threedogs.png";
 import mg from "./../../assets/MG.png";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import * as actionCreators from "./../../redux/actions";
 
 const Nav = (props) => {
+  const dispatch = useDispatch();
+
+  const [search, setSearch] = useState();
+
+  function handleClick(e) {
+    dispatch(actionCreators.search(search));
+  }
+  function handleChange(e) {
+    setSearch(e.target.value);
+  }
   return (
     <nav className={s.nav}>
       <div className={s.logo}>
@@ -16,18 +30,24 @@ const Nav = (props) => {
       </div>
       <div>
         <input
+          name="search"
           className={s.input}
           type="search"
           placeholder="Search by Breed"
           aria-label="Search"
+          onChange={handleChange}
         />
-        <button type="input" className={s.iconcont}>
+        <button onClick={handleClick} type="input" className={s.iconcont}>
           <img className={s.icon} src={mg} alt="Not Found" />
         </button>
       </div>
       <div className={s.links}>
-        <div className={s.home}>Home</div>
-        <div className={s.home}>Create Breed</div>
+        <Link to="/" className={s.home}>
+          <div>Home</div>
+        </Link>
+        <Link to="/CreateBreed" className={s.home}>
+          <div>Create Breed</div>
+        </Link>
       </div>
     </nav>
   );

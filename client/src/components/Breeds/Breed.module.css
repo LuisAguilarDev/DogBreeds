@@ -4,7 +4,8 @@
 }
 
 .panel {
-  width: 80%;
-  height: 1800px;
+  width: 100%;
+  min-height: 90%;
   margin-top: 24px;
+  margin-bottom: 0px;
 }

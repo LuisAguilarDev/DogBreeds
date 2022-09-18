@@ -42,6 +42,8 @@
 }
 .home {
   margin: 8px;
+  text-decoration: none;
+  color: white;
 }
 .pagename {
   font-size: 64px;

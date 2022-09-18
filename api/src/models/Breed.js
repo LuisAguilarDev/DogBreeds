@@ -26,6 +26,10 @@ module.exports = (sequelize) => {
         // allowNull: false,
         unique: true,
       },
+      createdByUser: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+      },
     },
     { timestamps: false }
   );

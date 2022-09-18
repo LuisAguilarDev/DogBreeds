@@ -1,39 +1,25 @@
 import React from "react";
-import { useState } from "react";
 import s from "./dropbtn.module.css";
+// import { useDispatch } from "react-redux";
+// import * as actionCreators from "./../../../redux/actions";
+
 const Dropbtn = (props) => {
-  const values = ["seleccionar", "A-Z", "Z-A"];
-  var [show, setShow] = useState(false);
-  function handleClick() {
-    console.log("click", show);
-    show ? setShow(false) : setShow(true);
-    console.log(show);
+  const values = ["Selecccionar", "A-Z", "Z-A"];
+  // var [show, setShow] = useState(false);
+  // const dispacth = useDispatch();
+  function handleClick(e) {
+    console.log(e.target.value);
+
+    // dispacth(actionCreators.sortAlphabeticallyAZ());
   }
   return (
-    // <div>
-    //   <button onClick={handleClick}>Ordenar</button>
-    //   <select className={show ? s.mostra : s.nomostra} size={values.length + 1}>
-    //     <optgroup label="Ordenar">
-    //       {values.map((o, i) => {
-    //         return (
-    //           <option key={i} value={o}>
-    //             {o}
-    //           </option>
-    //         );
-    //       })}
-    //     </optgroup>
-    //   </select>
-    //   <div>{Boolean.prototype.toString(show)}</div>
-    // </div>
-
-    //otro
     <div className={s.display}>
       <form>
         <label className={s.displayName}>Ordenar alfabeticamente:</label>
-        <select className={s.select}>
+        <select onChange={handleClick} className={s.select}>
           {values.map((o, i) => {
             return (
-              <option key={i} value={o}>
+              <option name={o} key={i} value={o}>
                 {o}
               </option>
             );

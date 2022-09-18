@@ -1,0 +1,41 @@
+.img {
+  height: 260px;
+  width: 260px;
+}
+.textbox {
+  background-color: #966f33;
+  margin-left: auto;
+  margin-right: auto;
+  width: 260px;
+  height: 80px;
+  border-color: black;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cardcontainer {
+  height: 50%;
+  width: 25%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+h2 {
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+}
+
+h3 {
+  font-size: 12px;
+  font-family: "Lato", sans-serif;
+  margin: 4px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.container {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
