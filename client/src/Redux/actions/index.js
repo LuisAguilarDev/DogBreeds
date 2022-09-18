@@ -1,8 +1,13 @@
 const axios = require("axios").default;
 
-export function getBreeds(page = 1) {
-  if (!page) return;
-  const requestUrl = `http://localhost:3001/dogs?page=${page}`;
+export function getBreeds(page) {
+  let requestUrl;
+  if (page === undefined) {
+    requestUrl = `http://localhost:3001/dogs`;
+  } else {
+    requestUrl = `http://localhost:3001/dogs?page=${page}`;
+  }
+  console.log(requestUrl);
   return function (dispatch) {
     console.log("entre", requestUrl);
     axios.get(requestUrl).then(async (response) => {

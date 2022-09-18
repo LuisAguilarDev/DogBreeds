@@ -8,20 +8,46 @@ const Pagination = (props) => {
   let lastPage = props.pages.lastPage;
   let siblings = 1;
   function onClickNext(e) {
-    props.getBreeds(5);
+    props.getBreeds(actualPage + 1);
+  }
+  function onClickPrevious(e) {
+    props.getBreeds(actualPage - 1);
+  }
+  function onClickFirst(e) {
+    props.getBreeds(1);
+  }
+  function onClickLast(e) {
+    props.getBreeds(lastPage);
   }
   return (
     <div className={s.pagination}>
-      {actualPage === 1 ? null : <div className={s.notactive}>&laquo;</div>}
-      {actualPage === 1 ? null : <div>...</div>}
       {actualPage === 1 ? null : (
-        <div className={s.notactive}>{actualPage - siblings}</div>
+        <div onClick={onClickPrevious} className={s.notactive}>
+          &laquo;
+        </div>
+      )}
+      {actualPage <= 2 ? null : (
+        <div className={s.notactive} onClick={onClickFirst}>
+          1
+        </div>
+      )}
+      {actualPage <= 3 ? null : <div>...</div>}
+      {actualPage === 1 ? null : (
+        <div onClick={onClickPrevious} className={s.notactive}>
+          {actualPage - siblings}
+        </div>
       )}
       <div className={s.active}>{actualPage}</div>
-      <div className={s.notactive}>{actualPage + siblings}</div>
-      {actualPage === lastPage - 1 ? null : <div>...</div>}
+      {actualPage >= lastPage - 1 ? null : (
+        <div onClick={onClickNext} className={s.notactive}>
+          {actualPage + siblings}
+        </div>
+      )}
+      {actualPage >= lastPage - 1 ? null : <div>...</div>}
       {actualPage === lastPage ? null : (
-        <div className={s.notactive}>{lastPage}</div>
+        <div onClick={onClickLast} className={s.notactive}>
+          {lastPage}
+        </div>
       )}
       {actualPage === lastPage ? null : (
         <div onClick={onClickNext} className={s.notactive}>
@@ -40,7 +66,7 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    getBreeds: () => dispatch(actionCreators.getBreeds()),
+    getBreeds: (value) => dispatch(actionCreators.getBreeds(value)),
   };
 };
 

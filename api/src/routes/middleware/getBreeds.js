@@ -2,6 +2,26 @@ const { Router } = require("express");
 const axios = require("axios").default;
 const { Breed, Temper } = require("./../../db");
 const router = Router();
+//dogs?page="x"
+router.get("/", async (req, res, next) => {
+  if (req.query.page > 1) {
+    let total = await Breed.count();
+    let page = req.query.page - 1;
+    let offsetIndex = 8 * page;
+    answer = await Breed.findAll({
+      order: [["id", "ASC"]],
+      offset: offsetIndex,
+      limit: 8,
+      include: Temper,
+      raw: false,
+    });
+    let jsonAnswer = JSON.parse(JSON.stringify(answer));
+    jsonAnswer.push({ lastPage: Math.ceil(total / 8), actualPage: page + 1 });
+    res.status(200).json(jsonAnswer);
+    return;
+  }
+  next();
+});
 
 router.get("/", async (req, res) => {
   // [ ] GET /dogs:
@@ -66,9 +86,7 @@ router.get("/", async (req, res) => {
 
             let result = await breed.setTempers(idfinder[0].id);
           });
-        } catch (error) {
-          console.log(error);
-        }
+        } catch (error) {}
       }
     });
 
@@ -77,8 +95,7 @@ router.get("/", async (req, res) => {
     //   console.log(error);
     // }
     let total = await Breed.count();
-    console.log(total);
-    let page = req.query.page - 1;
+    let page = 0;
     let offsetIndex = 8 * page;
     answer = await Breed.findAll({
       order: [["id", "ASC"]],
