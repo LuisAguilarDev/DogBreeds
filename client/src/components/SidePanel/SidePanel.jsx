@@ -1,8 +1,15 @@
 import React from "react";
 import s from "./SidePanel.module.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import * as actionCreators from "./../../redux/actions";
 
 const SidePanel = () => {
+  // const dispatch = useDispatch();
+  // // useState(() => {
+  // //   dispatch(actionCreators.getTemperaments());
+  // // }, []);
+
   const [filtros, setFiltros] = useState([]);
   function handleClick(e) {
     setFiltros([...filtros, e.target.innerHTML]);
@@ -12,6 +19,7 @@ const SidePanel = () => {
     actualFilter.splice([e.target.id], 1);
     setFiltros(actualFilter);
   }
+
   return (
     <div className={s.panel}>
       {filtros.length > 0 ? (

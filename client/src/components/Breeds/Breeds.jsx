@@ -2,25 +2,19 @@
 import { connect } from "react-redux";
 import * as actionCreators from "../../redux/actions/index.js";
 import BreedCard from "../BreedCard/BreedCard.jsx";
-import s from "./Breed.module.css";
-import { useState } from "react";
+import s from "./Breeds.module.css";
 import Pagination from "../Pagination/Pagination.jsx";
 
 const Breeds = (props) => {
-  useState(() => {
-    let page = 1;
-    props.getBreeds(page);
-  }, []);
-
   return (
-    <div>
+    <div className={s.view}>
       <div className={s.panel}>
         <div className={s.container}>
-          {props.breeds?.slice(0, 8).map((b) => {
+          {props.breeds?.slice(0, 8).map((b, i) => {
             return (
               <BreedCard
                 key={b.id}
-                id={b.id}
+                id={i}
                 img={b.img}
                 name={b.name}
                 temper={b.tempers}

@@ -1,9 +1,9 @@
 .pagination {
   display: flex;
   justify-content: flex-end;
-  bottom: 0;
   font-size: 32px;
-  right: 0;
+  margin: 8px;
+  background-color: #966f33;
 }
 
 .active {
@@ -20,7 +20,13 @@
   font-family: "Lato", sans-serif;
   padding: 4px;
   margin: 4px;
+  color: black;
 }
 .notactive:hover {
-  background-color: #ddd;
+  background-color: white;
+  color: #966f33;
+}
+.panel {
+  display: flex;
+  justify-content: space-between;
 }

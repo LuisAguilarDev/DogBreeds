@@ -10,6 +10,10 @@ import * as actionCreators from "./../../redux/actions";
 const Nav = (props) => {
   const dispatch = useDispatch();
 
+  useState(() => {
+    dispatch(actionCreators.getBreeds());
+  }, []);
+
   const [search, setSearch] = useState();
 
   function handleClick(e) {

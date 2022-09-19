@@ -3,14 +3,13 @@ const axios = require("axios").default;
 export function getBreeds(page) {
   let requestUrl;
   if (page === undefined) {
-    requestUrl = `http://localhost:3001/dogs`;
+    requestUrl = `http://localhost:3001/dogs?loading=true`;
   } else {
     requestUrl = `http://localhost:3001/dogs?page=${page}`;
   }
-  console.log(requestUrl);
   return function (dispatch) {
-    console.log("entre", requestUrl);
     axios.get(requestUrl).then(async (response) => {
+      // axios.get(requestUrl, [headers]).then(async (response) => {
       const apiResponse = await response.data;
       dispatch({ type: "getBreeds", payload: apiResponse });
     });
@@ -24,6 +23,7 @@ export function sortAlphabeticallyAZ(data) {
     dispatch({ type: "sortAlphabetically", payload: sorted });
   };
 }
+
 export function search(raza_perro) {
   return function (dispatch) {
     axios
@@ -35,25 +35,22 @@ export function search(raza_perro) {
       });
   };
 }
-// export function getMovieDetail(idMovie) {
-//   return function (dispatch) {
-//     return fetch(`http://www.omdbapi.com/?apikey=${apiKey}&i=${idMovie}`)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         dispatch({ type: "getMovieDetail", payload: data });
-//       });
-//   };
-// }
-// export function addMovieFavorite(payload) {
-//   return {
-//     type: "addMovieFavorite",
-//     payload,
-//   };
-// }
 
-// export function removeMovieFavorite(id) {
-//   return {
-//     type: "removeMovieFavorite",
-//     payload: id,
-//   };
-// }
+export function getTemperaments() {
+  return function (dispatch) {
+    axios.get(`http://localhost:3001/temperaments`).then(async (response) => {
+      const apiResponse = await response.data;
+      dispatch({ type: "getTemperaments", payload: apiResponse });
+    });
+  };
+}
+export function setFilter(filter) {
+  // (API) => createdByUser;
+  // (Temper) => Temper;
+  return function (dispatch) {
+    axios.get(`http://localhost:3001/temperaments`).then(async (response) => {
+      const apiResponse = await response.data;
+      dispatch({ type: "getTemperaments", payload: apiResponse });
+    });
+  };
+}

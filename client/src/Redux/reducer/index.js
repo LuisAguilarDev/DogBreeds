@@ -2,7 +2,9 @@ const initialState = {
   breeds: [],
   createdBreeds: [],
   pages: 0,
+  temperaments: [],
   loading: false,
+  filter: {},
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -26,11 +28,11 @@ export default function rootReducer(state = initialState, action) {
       breeds: action.payload,
     };
   }
-  // if (action.type === "getMovieDetail") {
-  //   return {
-  //     ...state,
-  //     movieDetail: action.payload,
-  //   };
-  // }
+  if (action.type === "getTemperaments") {
+    return {
+      ...state,
+      temperaments: action.payload,
+    };
+  }
   return state;
 }

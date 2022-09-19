@@ -4,8 +4,10 @@
 }
 
 .panel {
-  width: 100%;
-  min-height: 90%;
+  width: 80vw;
   margin-top: 24px;
-  margin-bottom: 0px;
+}
+
+.view {
+  max-width: 100%;
 }
