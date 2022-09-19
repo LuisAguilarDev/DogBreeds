@@ -1,14 +1,15 @@
 const initialState = {
   breeds: [],
+  search: [],
   createdBreeds: [],
   pages: 0,
   temperaments: [],
   loading: true,
   filter: {},
+  redirect: false,
 };
 
 export default function rootReducer(state = initialState, action) {
-  console.log(action);
   if (action.type === "getBreeds") {
     return {
       ...state,
@@ -26,7 +27,8 @@ export default function rootReducer(state = initialState, action) {
   if (action.type === "search") {
     return {
       ...state,
-      breeds: action.payload,
+      search: action.payload,
+      redirect: true,
     };
   }
   if (action.type === "getTemperaments") {

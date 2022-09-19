@@ -2,14 +2,15 @@ import React from "react";
 import s from "./SidePanel.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import * as actionCreators from "./../../redux/actions";
 
-const SidePanel = () => {
-  // const dispatch = useDispatch();
-  // // useState(() => {
-  // //   dispatch(actionCreators.getTemperaments());
-  // // }, []);
-
+const SidePanel = (props) => {
+  const dispatch = useDispatch();
+  useState(() => {
+    dispatch(actionCreators.getTemperaments());
+  }, []);
+  console.log(props.temperaments);
   const [filtros, setFiltros] = useState([]);
   function handleClick(e) {
     setFiltros([...filtros, e.target.innerHTML]);
@@ -51,8 +52,26 @@ const SidePanel = () => {
       ) : (
         <div></div>
       )}
+      <div>
+        <div>Filter By temperaments</div>
+        <select>
+          {props.temperaments.map((o, i) => {
+            return (
+              <option name={o.name} key={i} value={o.name}>
+                {o.name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
     </div>
   );
 };
+export const mapStateToProps = (state) => {
+  return {
+    loading: state.loading,
+    temperaments: state.temperaments,
+  };
+};
 
-export default SidePanel;
+export default connect(mapStateToProps, null)(SidePanel);

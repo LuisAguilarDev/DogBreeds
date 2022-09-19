@@ -1,11 +1,12 @@
 const { Router } = require("express");
 // Importar todos los routers;
 const getBreeds = require("./middleware/getBreeds");
-
+const getTemperaments = require("./middleware/getTemperaments");
 const router = Router();
 
 // Configurar los routers
 router.use("/dogs", getBreeds);
+router.use("/temperaments", getTemperaments);
 
 // [ ] GET /dogs?name="...":
 // Obtener un listado de las primeras 8 razas de perro que contengan la palabra ingresada como query parameter

@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as actionCreators from "./../../redux/actions";
+import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
 
 const Nav = (props) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   useState(() => {
     dispatch(actionCreators.getBreeds());
   }, []);
@@ -18,6 +20,7 @@ const Nav = (props) => {
 
   function handleClick(e) {
     dispatch(actionCreators.search(search));
+    navigate("/search");
   }
   function handleChange(e) {
     setSearch(e.target.value);
@@ -57,4 +60,10 @@ const Nav = (props) => {
   );
 };
 
-export default Nav;
+export const mapStateToProps = (state) => {
+  return {
+    redirect: state.redirect,
+  };
+};
+
+export default connect(mapStateToProps, null)(Nav);

@@ -14,6 +14,7 @@ function App() {
         <Route path="/" element={<GlobalContainer />} />
         <Route path="CreateBreed" element={<CreateBreed />} />
         <Route path="BreedDetail/:id" element={<BreedDetail />} />
+        <Route path="/:search" element={<GlobalContainer />} />
       </Routes>
     </div>
   );

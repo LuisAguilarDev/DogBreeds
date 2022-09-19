@@ -27,8 +27,9 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use("/dogs", getBreeds);
-server.use("/temperaments", getTemperaments);
+server.use(routes);
+// server.use("/dogs", getBreeds);
+// server.use("/temperaments", getTemperaments);
 
 // Error catching endware.
 server.use((err, req, res, next) => {

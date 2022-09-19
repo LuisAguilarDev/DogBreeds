@@ -1,8 +1,32 @@
 const { Router } = require("express");
 const axios = require("axios").default;
-const { Breed, Temper } = require("./../../db");
+const { Breed, Temper, Op } = require("./../../db");
 const router = Router();
-//dogs?page="x"
+
+router.get("/:id", async (req, res, next) => {
+  console.log(req.params);
+  let answer = await Breed.findAll({
+    where: {
+      id: req.params.id,
+    },
+    include: Temper,
+  });
+  res.status(200).json(answer);
+});
+
+router.get("/", async (req, res, next) => {
+  if (!req.query.name) return next();
+  let answer = await Breed.findAll({
+    where: {
+      name: {
+        [Op.iLike]: `%${req.query.name}%`,
+      },
+    },
+    include: Temper,
+  });
+  res.status(200).json(answer);
+});
+
 router.get("/", async (req, res, next) => {
   if (req.query.page >= 1) {
     let total = await Breed.count();
@@ -17,6 +41,7 @@ router.get("/", async (req, res, next) => {
       include: Temper,
       raw: false,
     });
+
     let jsonAnswer = JSON.parse(JSON.stringify(answer));
     jsonAnswer.push({ lastPage: Math.ceil(total / 8), actualPage: page + 1 });
     res.status(200).json(jsonAnswer);
@@ -106,6 +131,7 @@ router.get("/", async (req, res) => {
     include: Temper,
     raw: false,
   });
+
   let jsonAnswer = await JSON.parse(JSON.stringify(answer));
   jsonAnswer.push({ lastPage: Math.ceil(total / 8), actualPage: page + 1 });
   res.status(200).json(jsonAnswer);
