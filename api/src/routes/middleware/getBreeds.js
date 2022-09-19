@@ -4,12 +4,14 @@ const { Breed, Temper } = require("./../../db");
 const router = Router();
 //dogs?page="x"
 router.get("/", async (req, res, next) => {
-  if (req.query.page > 1) {
+  if (req.query.page >= 1) {
     let total = await Breed.count();
+    let orderColum = req.query.orderColumn || "id";
+    let order = req.query.order || "ASC";
     let page = req.query.page - 1;
     let offsetIndex = 8 * page;
     answer = await Breed.findAll({
-      order: [["id", "ASC"]],
+      order: [[orderColum, order]],
       offset: offsetIndex,
       limit: 8,
       include: Temper,
@@ -29,9 +31,9 @@ router.get("/", async (req, res) => {
   // Debe devolver solo los datos necesarios para la ruta principal
 
   temperamentos = [];
-  axios.get(`http://api.thedogapi.com/v1/breeds`).then(async (breeds) => {
+  await axios.get(`http://api.thedogapi.com/v1/breeds`).then((breeds) => {
     //Crear temperamentos
-    let tempers = await breeds.data.map((b) => {
+    breeds.data.map((b) => {
       if (b.temperament)
         b.temperament.split(", ").map((t) => {
           temperamentos.push(t);
@@ -74,40 +76,39 @@ router.get("/", async (req, res) => {
       let parsedAnswer = await JSON.parse(JSON.stringify(answer));
 
       if (b.temperament && parsedAnswer[0].tempers.length === 0) {
-        const bTemperament = await b.temperament.split(", ");
+        const bTemperament = b.temperament.split(", ");
         try {
-          bTemperament.map(async (t) => {
+          await bTemperament.map(async (t) => {
             let busqueda = await Temper.findAll({
               where: {
                 name: t,
               },
             });
-            idfinder = await JSON.parse(JSON.stringify(busqueda));
+            let idfinder = await JSON.parse(JSON.stringify(busqueda));
 
-            let result = await breed.setTempers(idfinder[0].id);
+            await breed.setTempers(idfinder[0].id);
           });
-        } catch (error) {}
+        } catch (error) {
+          return next(error);
+        }
       }
     });
-
-    //
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    let total = await Breed.count();
-    let page = 0;
-    let offsetIndex = 8 * page;
-    answer = await Breed.findAll({
-      order: [["id", "ASC"]],
-      offset: offsetIndex,
-      limit: 8,
-      include: Temper,
-      raw: false,
-    });
-    let jsonAnswer = JSON.parse(JSON.stringify(answer));
-    jsonAnswer.push({ lastPage: Math.ceil(total / 8), actualPage: page + 1 });
-    res.status(200).json(jsonAnswer);
   });
+  let orderColum = req.query.orderColumn || "id";
+  let order = req.query.order || "ASC";
+  let total = await Breed.count();
+  let page = 0;
+  let offsetIndex = 8 * page;
+  let answer = await Breed.findAll({
+    order: [[orderColum, order]],
+    offset: offsetIndex,
+    limit: 8,
+    include: Temper,
+    raw: false,
+  });
+  let jsonAnswer = await JSON.parse(JSON.stringify(answer));
+  jsonAnswer.push({ lastPage: Math.ceil(total / 8), actualPage: page + 1 });
+  res.status(200).json(jsonAnswer);
 });
 
 module.exports = router;

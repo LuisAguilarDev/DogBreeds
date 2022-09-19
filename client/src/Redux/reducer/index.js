@@ -3,7 +3,7 @@ const initialState = {
   createdBreeds: [],
   pages: 0,
   temperaments: [],
-  loading: false,
+  loading: true,
   filter: {},
 };
 
@@ -14,6 +14,7 @@ export default function rootReducer(state = initialState, action) {
       ...state,
       pages: action.payload.pop(),
       breeds: action.payload,
+      loading: false,
     };
   }
   if (action.type === "sortAlphabetically") {
