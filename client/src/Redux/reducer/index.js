@@ -7,6 +7,7 @@ const initialState = {
   loading: true,
   filter: {},
   redirect: false,
+  detail: [],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -35,6 +36,17 @@ export default function rootReducer(state = initialState, action) {
     return {
       ...state,
       temperaments: action.payload,
+    };
+  }
+  if (action.type === "getByID") {
+    console.log(
+      "🚀 ~ file: index.js ~ line 42 ~ rootReducer ~ getByID",
+      "getByID"
+    );
+
+    return {
+      ...state,
+      detail: action.payload,
     };
   }
   return state;

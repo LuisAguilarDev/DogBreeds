@@ -44,3 +44,16 @@
   text-justify: inter-word;
   font-weight: 700;
 }
+
+.return {
+  position: absolute;
+  max-height: 10%;
+  max-width: 10%;
+  right: 0;
+  margin: 40px;
+}
+.home {
+  margin: 8px;
+  text-decoration: none;
+  color: white;
+}

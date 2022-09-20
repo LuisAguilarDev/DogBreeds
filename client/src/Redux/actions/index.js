@@ -3,7 +3,7 @@ const axios = require("axios").default;
 export function getBreeds(page) {
   let requestUrl;
   if (page === undefined) {
-    requestUrl = `http://localhost:3001/dogs?loading=true`;
+    requestUrl = `http://localhost:3001/dogs`;
   } else {
     requestUrl = `http://localhost:3001/dogs?page=${page}`;
   }
@@ -12,6 +12,17 @@ export function getBreeds(page) {
       // axios.get(requestUrl, [headers]).then(async (response) => {
       const apiResponse = await response.data;
       dispatch({ type: "getBreeds", payload: apiResponse });
+    });
+  };
+}
+
+export function getByID(id) {
+  let requestUrl = `http://localhost:3001/dogs/${id}`;
+  return function (dispatch) {
+    axios.get(requestUrl).then(async (response) => {
+      // axios.get(requestUrl, [headers]).then(async (response) => {
+      const apiResponse = await response.data;
+      dispatch({ type: "getByID", payload: apiResponse });
     });
   };
 }

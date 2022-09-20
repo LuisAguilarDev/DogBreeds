@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const BreedCard = (props) => {
   let text = [];
   props.temper.map((o) => text.push(" " + o.name));
-
+  let defaultText = "This has not yet been determined.";
   return (
     <div className={s.cardcontainer}>
       <div className={s.container}>
@@ -15,7 +15,11 @@ const BreedCard = (props) => {
       </div>
       <div className={s.textbox}>
         <h2>{props.name}</h2>
-        <h3>{text.toString(",").trim() + "."}</h3>
+        {text.length === 0 ? (
+          <h3>{defaultText}</h3>
+        ) : (
+          <h3>{text.toString(",").trim() + "."}</h3>
+        )}
       </div>
     </div>
   );

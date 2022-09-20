@@ -19,22 +19,22 @@ const Breeds = (props) => {
       <div className={s.panel}>
         <div className={s.container}>
           {search
-            ? props.breeds?.slice(0, 8)?.map((b, i) => {
+            ? props.breeds?.slice(0, 8)?.map((b) => {
                 return (
                   <BreedCard
                     key={b.id}
-                    id={i}
+                    id={b.id}
                     img={b.img}
                     name={b.name}
                     temper={b.tempers}
                   />
                 );
               })
-            : props.search?.slice(0, 8)?.map((b, i) => {
+            : props.search?.slice(0, 8)?.map((b) => {
                 return (
                   <BreedCard
                     key={b.id}
-                    id={i}
+                    id={b.id}
                     img={b.img}
                     name={b.name}
                     temper={b.tempers}
