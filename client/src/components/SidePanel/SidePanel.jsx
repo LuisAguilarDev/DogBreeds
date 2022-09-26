@@ -10,17 +10,24 @@ const SidePanel = (props) => {
   useState(() => {
     dispatch(actionCreators.getTemperaments());
   }, []);
-  console.log(props.temperaments);
+
   const [filtros, setFiltros] = useState([]);
   function handleClick(e) {
     setFiltros([...filtros, e.target.innerHTML]);
   }
   function handleFilter(e) {
     let actualFilter = [...filtros];
+    console.log(e);
     actualFilter.splice([e.target.id], 1);
     setFiltros(actualFilter);
   }
-
+  function handleChange(e) {
+    let actualFilter = [...filtros];
+    actualFilter.push(e.target.value);
+    console.log(actualFilter, e.target.value);
+    setFiltros(actualFilter);
+    console.log(filtros);
+  }
   return (
     <div className={s.panel}>
       {filtros.length > 0 ? (
@@ -30,7 +37,7 @@ const SidePanel = (props) => {
             return (
               <div key={i} id={i} onClick={handleFilter}>
                 {f}
-                <button>X</button>
+                <button id={i}>X</button>
               </div>
             );
           })}
@@ -54,7 +61,7 @@ const SidePanel = (props) => {
       )}
       <div>
         <div>Filter By temperaments</div>
-        <select>
+        <select onChange={handleChange}>
           {props.temperaments.map((o, i) => {
             return (
               <option name={o.name} key={i} value={o.name}>

@@ -1,6 +1,8 @@
 import React from "react";
 import s from "./BreedCard.module.css";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actionCreators from "../../redux/actions/index.js";
 
 const BreedCard = (props) => {
   let text = [];
@@ -25,4 +27,18 @@ const BreedCard = (props) => {
   );
 };
 
-export default BreedCard;
+export const mapStateToProps = (state) => {
+  return {
+    breeds: state.breeds,
+    search: state.search,
+    pageSearch: state.pageSearch,
+  };
+};
+
+export const mapDispatchToProps = (dispatch) => {
+  return {
+    getBreeds: () => dispatch(actionCreators.getBreeds()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BreedCard);

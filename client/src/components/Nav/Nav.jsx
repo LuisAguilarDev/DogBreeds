@@ -19,7 +19,8 @@ const Nav = (props) => {
   const [search, setSearch] = useState();
 
   function handleClick(e) {
-    dispatch(actionCreators.search(search));
+    dispatch(actionCreators.search(search, props.filter));
+    dispatch(actionCreators.setPageSearch(1));
     navigate("/search");
   }
   function handleChange(e) {
@@ -49,7 +50,7 @@ const Nav = (props) => {
         </button>
       </div>
       <div className={s.links}>
-        <Link to="/" className={s.home}>
+        <Link to="/dogs" className={s.home}>
           <div>Home</div>
         </Link>
         <Link to="/CreateBreed" className={s.home}>
@@ -63,6 +64,7 @@ const Nav = (props) => {
 export const mapStateToProps = (state) => {
   return {
     redirect: state.redirect,
+    filter: state.filter,
   };
 };
 

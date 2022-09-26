@@ -70,7 +70,7 @@ server.use(async (req, res, next) => {
     }
     /////////////////////////Razas Creadas//////////////////////////////////////
     //findAll retorna Arrays
-    breeds.data.map(async (b) => {
+    let promise = breeds.data.map(async (b) => {
       const breed = await Breed.findAll({
         where: {
           img: b.image.url,
@@ -92,6 +92,7 @@ server.use(async (req, res, next) => {
       }
     });
     //////////////////////////Estado INICIAL////////////////////////////////////////////////
+    const hola = await Promise.all(promise);
     next();
   });
 });

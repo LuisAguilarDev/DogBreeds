@@ -1,0 +1,42 @@
+.entrar {
+  position: absolute;
+  margin-top: 55vh;
+  margin-left: 46vw;
+  background-color: #966f33;
+  font-family: "Lato", sans-serif;
+  width: 5vw;
+  justify-content: center;
+  border: 5px;
+  font-weight: 900;
+  display: flex;
+  padding: 2.4vh;
+  border-color: black;
+  border-width: 20px;
+  border-style: solid;
+  border-radius: 10px 10px;
+  font-size: 2.5vh;
+  text-decoration: none;
+}
+.entrar:hover {
+  background-color: white;
+  color: #966f33;
+  cursor: pointer;
+}
+.padre {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+.img {
+  height: 100vh;
+  width: 100vw;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:hover {
+}

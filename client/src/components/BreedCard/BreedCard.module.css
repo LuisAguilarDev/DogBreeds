@@ -2,6 +2,7 @@
   height: 260px;
   width: 260px;
   border-radius: 8px;
+  cursor: pointer;
 }
 .textbox {
   background-color: #966f33;

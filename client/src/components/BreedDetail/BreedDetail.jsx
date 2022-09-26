@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import s from "./BreedDetail.module.css";
 import * as actionCreators from "../../redux/actions/index.js";
 import back from "./../../assets/goBack.png";
 import { Link } from "react-router-dom";
+import Nav from "../../components/Nav/Nav.jsx";
 
 const BreedDetail = (props) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   let text = [];
   let defaultText = "-Temperament: This has not yet been determined.";
   useState(() => {
@@ -18,7 +20,10 @@ const BreedDetail = (props) => {
 
   return (
     <div>
-      <Link to="/" className={s.home}>
+      <div>
+        <Nav />
+      </div>
+      <Link onClick={() => navigate(-1)} className={s.home}>
         <img src={back} alt="not Found" className={s.return} />
       </Link>
       {length ? (

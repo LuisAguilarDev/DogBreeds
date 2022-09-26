@@ -1,12 +1,13 @@
 const axios = require("axios").default;
 
-export function getBreeds(page) {
-  let requestUrl;
-  if (page === undefined) {
-    requestUrl = `http://localhost:3001/dogs`;
-  } else {
-    requestUrl = `http://localhost:3001/dogs?page=${page}`;
+export function getBreeds(filter) {
+  let back = "?";
+
+  for (const prop in filter) {
+    back = back + `${prop}=${filter[prop]}&`;
   }
+  let requestUrl = `http://localhost:3001/dogs` + back.slice(0, -1);
+  console.log(requestUrl);
   return function (dispatch) {
     axios.get(requestUrl).then(async (response) => {
       // axios.get(requestUrl, [headers]).then(async (response) => {
@@ -35,7 +36,8 @@ export function sortAlphabeticallyAZ(data) {
   };
 }
 
-export function search(raza_perro) {
+export function search(raza_perro, filter) {
+  console.log(filter);
   return function (dispatch) {
     axios
       .get(`http://localhost:3001/dogs?name=${raza_perro}`)
@@ -56,12 +58,12 @@ export function getTemperaments() {
   };
 }
 export function setFilter(filter) {
-  // (API) => createdByUser;
-  // (Temper) => Temper;
   return function (dispatch) {
-    axios.get(`http://localhost:3001/temperaments`).then(async (response) => {
-      const apiResponse = await response.data;
-      dispatch({ type: "getTemperaments", payload: apiResponse });
-    });
+    dispatch({ type: "setFilter", payload: filter });
+  };
+}
+export function setPageSearch(page) {
+  return function (dispatch) {
+    dispatch({ type: "setPageSearch", payload: page });
   };
 }

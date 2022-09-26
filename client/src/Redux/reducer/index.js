@@ -5,9 +5,10 @@ const initialState = {
   pages: 0,
   temperaments: [],
   loading: true,
-  filter: {},
   redirect: false,
   detail: [],
+  pageSearch: 1,
+  filter: {},
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -39,14 +40,21 @@ export default function rootReducer(state = initialState, action) {
     };
   }
   if (action.type === "getByID") {
-    console.log(
-      "🚀 ~ file: index.js ~ line 42 ~ rootReducer ~ getByID",
-      "getByID"
-    );
-
     return {
       ...state,
       detail: action.payload,
+    };
+  }
+  if (action.type === "setPageSearch") {
+    return {
+      ...state,
+      pageSearch: action.payload,
+    };
+  }
+  if (action.type === "setFilter") {
+    return {
+      ...state,
+      filter: { ...state.filter, ...action.payload },
     };
   }
   return state;

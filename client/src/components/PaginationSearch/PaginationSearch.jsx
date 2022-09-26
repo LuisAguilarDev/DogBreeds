@@ -1,23 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../redux/actions/index.js";
-import s from "./Pagination.module.css";
+import s from "./PaginationSearch.module.css";
 
-const Pagination = (props) => {
-  let actualPage = parseInt(props.pages.actualPage);
-  let lastPage = props.pages.lastPage;
+const PaginationSearch = (props) => {
+  let actualPage = props.pageSearch;
+  let lastPage = Math.ceil(props.search.length / 8);
   let siblings = 1;
   function onClickNext(e) {
-    props.getBreeds({ ...props.filter, page: actualPage + 1 });
+    props.setPageSearch(actualPage + 1);
   }
   function onClickPrevious(e) {
-    props.getBreeds({ ...props.filter, page: actualPage - 1 });
+    props.setPageSearch(actualPage - 1);
   }
   function onClickFirst(e) {
-    props.getBreeds({ ...props.filter, page: 1 });
+    props.setPageSearch(1);
   }
   function onClickLast(e) {
-    props.getBreeds({ ...props.filter, page: lastPage });
+    props.setPageSearch(lastPage);
   }
   return (
     <div className={s.panel}>
@@ -45,7 +45,7 @@ const Pagination = (props) => {
             {actualPage + siblings}
           </div>
         )}
-        {actualPage >= lastPage - 1 ? null : <div className={s.dots}>...</div>}
+        {actualPage >= lastPage - 2 ? null : <div className={s.dots}>...</div>}
         {actualPage === lastPage ? null : (
           <div onClick={onClickLast} className={s.notactive}>
             {lastPage}
@@ -63,15 +63,15 @@ const Pagination = (props) => {
 
 export const mapStateToProps = (state) => {
   return {
-    pages: state.pages,
-    filter: state.filter,
+    pageSearch: state.pageSearch,
+    search: state.search,
   };
 };
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    getBreeds: (value) => dispatch(actionCreators.getBreeds(value)),
+    setPageSearch: (value) => dispatch(actionCreators.setPageSearch(value)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pagination);
+export default connect(mapStateToProps, mapDispatchToProps)(PaginationSearch);
