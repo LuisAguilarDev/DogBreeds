@@ -4,8 +4,8 @@ import * as actionCreators from "./../../../redux/actions";
 import { connect } from "react-redux";
 
 const Dropbtn = (props) => {
-  const values = ["Selecccionar", "A-Z", "Z-A"];
-  const values2 = ["ASC", "ASC", "DESC"];
+  const values = ["A-Z", "Z-A"];
+  const values2 = ["ASC", "DESC"];
   function handleChange(e) {
     let index = values.findIndex((element) => element === e.target.value);
     console.log(index);
@@ -26,6 +26,7 @@ const Dropbtn = (props) => {
       <form>
         <label className={s.displayName}>Ordenar alfabeticamente:</label>
         <select onChange={handleChange} className={s.select}>
+          <option disabled>Selecccionar</option>
           {values.map((o, i) => {
             return (
               <option name={o} key={i} id={i} value={o}>

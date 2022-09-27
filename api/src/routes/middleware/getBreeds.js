@@ -4,7 +4,6 @@ const { Breed, Temper, Op } = require("./../../db");
 const router = Router();
 
 router.get("/:id", async (req, res, next) => {
-  console.log(req.params);
   let answer = await Breed.findAll({
     where: {
       id: req.params.id,
@@ -15,6 +14,44 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.get("/", async (req, res, next) => {
+  if (!req.query.temper) return next();
+  let page = req.query.page || 1;
+  let offsetIndex = 8 * (page - 1);
+  let total = await Breed.count({
+    include: [
+      {
+        model: Temper,
+        where: { name: req.query.temper },
+      },
+    ],
+  });
+  let finderId = await Breed.findAll({
+    include: [
+      {
+        model: Temper,
+        where: { name: req.query.temper },
+      },
+    ],
+    offset: offsetIndex,
+    limit: 8,
+  });
+  let finderIdParsed = finderId.map((b) => b.toJSON());
+  let id = [];
+  finderIdParsed.forEach((b) => {
+    id.push({ id: b.id });
+  });
+  let answer = await Breed.findAll({
+    where: {
+      [Op.or]: id,
+    },
+    include: Temper,
+  });
+  let parsedAnswer = answer.map((b) => b.toJSON());
+  parsedAnswer.push({ lastPage: Math.ceil(total / 8), actualPage: page });
+  res.status(200).json(parsedAnswer);
+});
+
+router.get("/", async (req, res, next) => {
   if (!req.query.name) return next();
   let answer = await Breed.findAll({
     where: {
@@ -22,13 +59,7 @@ router.get("/", async (req, res, next) => {
         [Op.iLike]: `%${req.query.name}%`,
       },
     },
-    include: [
-      {
-        model: Temper,
-        through: { where: { name: 2015 } },
-        attributes: ["id"],
-      },
-    ],
+    include: Temper,
   });
   res.status(200).json(answer);
 });
@@ -43,7 +74,7 @@ router.get("/", async (req, res, next) => {
     let order = req.query.order || "ASC";
     let page = req.query.page;
     let offsetIndex = 8 * (page - 1);
-    total = await Breed.findAll({
+    let total = await Breed.findAll({
       order: [[orderColum, order]],
       include: Temper,
     });

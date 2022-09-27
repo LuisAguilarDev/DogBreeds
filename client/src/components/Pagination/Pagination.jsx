@@ -21,42 +21,47 @@ const Pagination = (props) => {
   }
   return (
     <div className={s.panel}>
-      <div></div>
-      <div className={s.pagination}>
-        {actualPage === 1 ? null : (
-          <div onClick={onClickPrevious} className={s.notactive}>
-            &laquo;
-          </div>
-        )}
-        {actualPage <= 2 ? null : (
-          <div className={s.notactive} onClick={onClickFirst}>
-            1
-          </div>
-        )}
-        {actualPage <= 3 ? null : <div className={s.dots}>...</div>}
-        {actualPage === 1 ? null : (
-          <div onClick={onClickPrevious} className={s.notactive}>
-            {actualPage - siblings}
-          </div>
-        )}
-        <div className={s.active}>{actualPage}</div>
-        {actualPage >= lastPage - 1 ? null : (
-          <div onClick={onClickNext} className={s.notactive}>
-            {actualPage + siblings}
-          </div>
-        )}
-        {actualPage >= lastPage - 1 ? null : <div className={s.dots}>...</div>}
-        {actualPage === lastPage ? null : (
-          <div onClick={onClickLast} className={s.notactive}>
-            {lastPage}
-          </div>
-        )}
-        {actualPage === lastPage ? null : (
-          <div onClick={onClickNext} className={s.notactive}>
-            &raquo;
-          </div>
-        )}
-      </div>
+      {lastPage === 1 ? (
+        <div></div>
+      ) : (
+        <div className={s.pagination}>
+          {actualPage === 1 ? null : (
+            <div onClick={onClickPrevious} className={s.notactive}>
+              &laquo;
+            </div>
+          )}
+          {actualPage <= 2 ? null : (
+            <div className={s.notactive} onClick={onClickFirst}>
+              1
+            </div>
+          )}
+          {actualPage <= 3 ? null : <div className={s.dots}>...</div>}
+          {actualPage === 1 ? null : (
+            <div onClick={onClickPrevious} className={s.notactive}>
+              {actualPage - siblings}
+            </div>
+          )}
+          <div className={s.active}>{actualPage}</div>
+          {actualPage >= lastPage - 1 ? null : (
+            <div onClick={onClickNext} className={s.notactive}>
+              {actualPage + siblings}
+            </div>
+          )}
+          {actualPage >= lastPage - 1 ? null : (
+            <div className={s.dots}>...</div>
+          )}
+          {actualPage === lastPage ? null : (
+            <div onClick={onClickLast} className={s.notactive}>
+              {lastPage}
+            </div>
+          )}
+          {actualPage === lastPage ? null : (
+            <div onClick={onClickNext} className={s.notactive}>
+              &raquo;
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

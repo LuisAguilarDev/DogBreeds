@@ -4,3 +4,48 @@
   min-height: 90vh;
   max-height: 100vh;
 }
+
+.titlePrincipal {
+  color: white;
+  font-size: 24px;
+  margin-left: 16px;
+  font-weight: 900;
+  letter-spacing: +1.5px;
+}
+
+.title {
+  color: white;
+  font-size: 16px;
+  margin-left: 16px;
+  font-weight: 700;
+  letter-spacing: +1.5px;
+
+  display: flex;
+}
+
+.select {
+  margin-left: 24px;
+}
+
+.option {
+  color: white;
+  font-weight: 400;
+  letter-spacing: +1.5px;
+  margin-left: 24px;
+}
+
+.option:hover {
+  color: #966f33;
+}
+
+.filters {
+  display: flex;
+  margin-left: 4px;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #966f33;
+  margin-right: 8vw;
+  margin-top: 4px;
+}

@@ -57,5 +57,12 @@ export default function rootReducer(state = initialState, action) {
       filter: { ...state.filter, ...action.payload },
     };
   }
+  if (action.type === "deleteTemper") {
+    const { temper, ...rest } = state.filter;
+    return {
+      ...state,
+      filter: { ...rest },
+    };
+  }
   return state;
 }

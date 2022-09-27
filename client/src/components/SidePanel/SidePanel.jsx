@@ -11,65 +11,105 @@ const SidePanel = (props) => {
     dispatch(actionCreators.getTemperaments());
   }, []);
 
-  const [filtros, setFiltros] = useState([]);
-  function handleClick(e) {
-    setFiltros([...filtros, e.target.innerHTML]);
+  const [filtros, setFiltros] = useState({});
+
+  function handleClickCreation(e) {
+    let actualFilter = { ...filtros, ...props.filter };
+    actualFilter = { ...actualFilter, createdBy: e.target.innerHTML };
+    console.log(actualFilter);
+    setFiltros({ ...actualFilter });
+    props.getBreeds(actualFilter);
+    props.setFilter(actualFilter);
   }
+
   function handleFilter(e) {
-    let actualFilter = [...filtros];
-    console.log(e);
-    actualFilter.splice([e.target.id], 1);
-    setFiltros(actualFilter);
+    let filtered = { ...filtros, ...props.filter };
+    delete filtered[e.target.name];
+    setFiltros(filtered);
+    props.getBreeds(filtered);
+    props.setFilter(filtered);
+    if (!filtered.temper) props.deleteTemper();
   }
-  function handleChange(e) {
-    let actualFilter = [...filtros];
-    actualFilter.push(e.target.value);
-    console.log(actualFilter, e.target.value);
+
+  function handleChangeTemper(e) {
+    let actualFilter = { ...filtros, ...props.filter };
+    actualFilter = { ...actualFilter, temper: e.target.value };
     setFiltros(actualFilter);
-    console.log(filtros);
+    props.getBreeds(actualFilter);
+    props.setFilter(actualFilter);
   }
   return (
     <div className={s.panel}>
-      {filtros.length > 0 ? (
+      <div className={s.titlePrincipal}>Filtrar</div>
+      {Object.keys(filtros).length > 0 ? (
         <div>
-          <div>Filtros Actuales</div>
-          {filtros.map((f, i) => {
-            return (
-              <div key={i} id={i} onClick={handleFilter}>
-                {f}
-                <button id={i}>X</button>
-              </div>
-            );
-          })}
+          <div className={s.title}>Filtros Aplicados</div>
+          {filtros.createdBy ? (
+            <div className={s.filters}>
+              <div className={s.option}>Source: {filtros.createdBy}</div>
+              <button
+                name={"createdBy"}
+                className={s.button}
+                onClick={handleFilter}
+              >
+                x
+              </button>
+            </div>
+          ) : (
+            <div></div>
+          )}
+          {filtros.temper ? (
+            <div className={s.filters}>
+              <div className={s.option}>Temper: {filtros.temper}</div>
+              <button
+                name={"temper"}
+                className={s.button}
+                onClick={handleFilter}
+              >
+                x
+              </button>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       ) : (
         <div></div>
       )}
-      {filtros.length === 0 ? (
+      {filtros.createdBy ? (
+        <div></div>
+      ) : (
         <div>
-          <div>Filtrar</div>
-          <div>Por Fuente</div>
-          <div onClick={handleClick} name="API">
+          <div className={s.title}>Por Fuente</div>
+          <div className={s.option} onClick={handleClickCreation} name="API">
             API
           </div>
-          <div onClick={handleClick} name="CREADOS POR USUARIOS">
-            Creados por Usuarios
+          <div
+            className={s.option}
+            onClick={handleClickCreation}
+            name="CREADOS POR USUARIOS"
+          >
+            Created By Users
           </div>
         </div>
-      ) : (
-        <div></div>
       )}
       <div>
-        <div>Filter By temperaments</div>
-        <select onChange={handleChange}>
-          {props.temperaments.map((o, i) => {
-            return (
-              <option name={o.name} key={i} value={o.name}>
-                {o.name}
-              </option>
-            );
-          })}
-        </select>
+        {filtros.temper ? (
+          <div></div>
+        ) : (
+          <div>
+            <div className={s.title}>Filter By temperaments</div>
+            <select className={s.select} onChange={handleChangeTemper}>
+              {props.temperaments.map((o, i) => {
+                return (
+                  <option name={o.name} key={i} value={o.name}>
+                    {o.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -78,7 +118,16 @@ export const mapStateToProps = (state) => {
   return {
     loading: state.loading,
     temperaments: state.temperaments,
+    filter: state.filter,
   };
 };
 
-export default connect(mapStateToProps, null)(SidePanel);
+export const mapDispatchToProps = (dispatch) => {
+  return {
+    setFilter: (value) => dispatch(actionCreators.setFilter(value)),
+    getBreeds: (value) => dispatch(actionCreators.getBreeds(value)),
+    deleteTemper: () => dispatch(actionCreators.deleteTemper()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SidePanel);

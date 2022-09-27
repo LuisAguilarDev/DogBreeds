@@ -36,63 +36,66 @@ server.use(async (req, res, next) => {
   temperamentosObj = [];
   await axios.get(`http://api.thedogapi.com/v1/breeds`).then(async (breeds) => {
     // Crear temperamentos
-    let cuentaT = await Temper.count();
-    if (cuentaT < 10) {
-      breeds.data.map((b) => {
-        if (b.temperament)
-          b.temperament.split(", ").map((t) => {
-            temperamentos.push(t);
-          });
-      });
-      const dataArr = new Set(temperamentos);
-      let uniqueTempers = [...dataArr];
-
-      uniqueTempers.map((n, i) => {
-        temperamentosObj.push({ id: i, name: n });
-      });
-      Temper.bulkCreate(temperamentosObj);
-    }
-    //////////////////////////Temperamentos creados/////////////////////////////
-    let BreedsObj = [];
-    let cuentaB = await Breed.count();
-    if (cuentaB < 10) {
-      breeds.data.map(async (b) => {
-        const newBreed = {
-          name: b.name,
-          weight: b.weight.imperial + " kg",
-          height: b.weight.imperial + " cm",
-          life_span: b.life_span,
-          img: b.image.url,
-        };
-        BreedsObj.push(newBreed);
-      });
-      Breed.bulkCreate(BreedsObj);
-    }
-    /////////////////////////Razas Creadas//////////////////////////////////////
-    //findAll retorna Arrays
-    let promise = breeds.data.map(async (b) => {
-      const breed = await Breed.findAll({
-        where: {
-          img: b.image.url,
-        },
-        include: Temper,
-      });
-      const amountTempers = await breed[0]?.toJSON()?.tempers.length;
-      if (b.temperament && amountTempers === 0) {
-        const bTemperament = b.temperament.split(", ");
-        bTemperament.map(async (t) => {
-          let busqueda = await Temper.findAll({
-            where: {
-              name: t,
-            },
-          });
-          let idfinder = JSON.parse(JSON.stringify(busqueda));
-          breed[0].setTempers(idfinder[0].id);
+    let loading = true;
+    if (loading) {
+      let cuentaT = await Temper.count();
+      if (cuentaT < 10) {
+        breeds.data.map((b) => {
+          if (b.temperament)
+            b.temperament.split(", ").map((t) => {
+              temperamentos.push(t);
+            });
         });
+        const dataArr = new Set(temperamentos);
+        let uniqueTempers = [...dataArr];
+
+        uniqueTempers.map((n, i) => {
+          temperamentosObj.push({ id: i, name: n });
+        });
+        Temper.bulkCreate(temperamentosObj);
       }
-    });
-    //////////////////////////Estado INICIAL////////////////////////////////////////////////
-    const hola = await Promise.all(promise);
+      //////////////////////////Temperamentos creados/////////////////////////////
+      let BreedsObj = [];
+      let cuentaB = await Breed.count();
+      if (cuentaB < 10) {
+        breeds.data.map(async (b) => {
+          const newBreed = {
+            name: b.name,
+            weight: b.weight.imperial + " kg",
+            height: b.weight.imperial + " cm",
+            life_span: b.life_span,
+            img: b.image.url,
+          };
+          BreedsObj.push(newBreed);
+        });
+        Breed.bulkCreate(BreedsObj);
+      }
+      /////////////////////////Razas Creadas//////////////////////////////////////
+      //findAll retorna Arrays
+      let promise = breeds.data.map(async (b) => {
+        const breed = await Breed.findAll({
+          where: {
+            img: b.image.url,
+          },
+          include: Temper,
+        });
+        const amountTempers = await breed[0]?.toJSON()?.tempers.length;
+        if (b.temperament && amountTempers === 0) {
+          const bTemperament = b.temperament.split(", ");
+          bTemperament.map(async (t) => {
+            let busqueda = await Temper.findAll({
+              where: {
+                name: t,
+              },
+            });
+            let idfinder = JSON.parse(JSON.stringify(busqueda));
+            breed[0].setTempers(idfinder[0].id);
+          });
+        }
+      });
+      //////////////////////////Estado INICIAL////////////////////////////////////////////////
+      const hola = await Promise.all(promise).then((x) => (loading = false));
+    }
     next();
   });
 });

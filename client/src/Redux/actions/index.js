@@ -67,3 +67,8 @@ export function setPageSearch(page) {
     dispatch({ type: "setPageSearch", payload: page });
   };
 }
+export function deleteTemper() {
+  return function (dispatch) {
+    dispatch({ type: "deleteTemper", payload: null });
+  };
+}
