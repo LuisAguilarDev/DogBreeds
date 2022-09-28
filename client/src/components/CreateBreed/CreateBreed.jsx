@@ -1,89 +1,146 @@
 import React from "react";
 import s from "./CreateBreed.module.css";
 import { useState } from "react";
+import { connect } from "react-redux";
+import * as actionCreators from "./../../redux/actions";
+import NAV from "./../Nav/Nav";
 
 const CreateBreed = (props) => {
-  const [data, setData] = useState({ createdByUser: true });
+  let imgSrc = [
+    "https://static01.nyt.com/images/2022/08/25/science/25DogDementia-08/25DogDementia-08-videoSixteenByNine3000.jpg",
+    "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/rockcms/2022-08/220805-border-collie-play-mn-1100-82d2f1.jpg",
+    "https://ichef.bbci.co.uk/news/976/cpsprodpb/17638/production/_124800859_gettyimages-817514614.jpg",
+    "https://scx2.b-cdn.net/gfx/news/2021/dog.jpg",
+    "https://www.forbes.com/advisor/wp-content/uploads/2021/03/pit-bull-featured.jpg",
+    "https://d17fnq9dkz9hgj.cloudfront.net/breed-uploads/2019/11/Petfinder_Resize_485x250_teddybeardog.jpg?bust=1574877513",
+  ];
+  const [data, setData] = useState({
+    createdByUser: true,
+    tempers: [],
+    img: imgSrc[Math.floor(Math.random() * 6)],
+  });
+  console.log(data);
   function handleChange(e) {
     setData({ ...data, [e.target.name]: e.target.value });
   }
-  function handleSubmit(e) {}
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+  function handleChangeTemper(e) {
+    let obj = { ...data };
+    let obj2 = { ...obj, tempers: [...obj.tempers, e.target.value] };
+    setData(obj2);
+    console.log(obj2);
+  }
+  function handleDelete(e) {
+    let filtered = data.tempers;
+    filtered.splice(e.target.id, 1);
+    setData({ ...data, tempers: filtered });
+  }
+
   return (
-    <div className={s.top}>
-      <form
-        action=""
-        method="post"
-        className={s.formPost}
-        onSubmit={handleSubmit}
-      >
-        <div className={s.title}>Create Your Own Breed</div>
-        <p className={s.parrafo}>
-          <div>
-            <label for="POST-name">Name:</label>
-          </div>
-          <div>
+    <div>
+      <NAV />
+      <div className={s.top}>
+        <form className={s.formPost} onSubmit={handleSubmit}>
+          <div className={s.title}>Create Your Own Breed</div>
+          <p className={s.parrafo}>
+            <div>
+              <label>Name:</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                name="name"
+                className={s.input}
+                onChange={handleChange}
+                placeholder="Enter the name of the breed"
+              />
+            </div>
+          </p>
+          <p className={s.parrafo}>
+            <label>Life span:</label>
             <input
-              id="POST-name"
               type="text"
-              name="name"
+              name="life_span"
               className={s.input}
               onChange={handleChange}
-              placeholder="Enter the name of the breed"
+              placeholder="3-10 years"
             />
+          </p>
+          <p className={s.parrafo}>
+            <label>Weight:</label>
+            <input
+              type="text"
+              name="weight"
+              className={s.input}
+              onChange={handleChange}
+              placeholder="2-10 kg"
+            />
+          </p>
+          <p className={s.parrafo}>
+            <label>Height:</label>
+            <input
+              type="text"
+              name="height"
+              className={s.input}
+              onChange={handleChange}
+              placeholder="30-40 cm"
+            />
+          </p>
+
+          <div>
+            <div className={s.title}>Add the temperaments</div>
+            <select className={s.select} onChange={handleChangeTemper}>
+              {props.temperaments.map((o, i) => {
+                return (
+                  <option name={o.name} key={i} value={o.name}>
+                    {o.name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
-        </p>
-        <p className={s.parrafo}>
-          <label for="POST-life_span">Life span:</label>
-          <input
-            id="POST-life_span"
-            type="text"
-            name="life_span"
-            className={s.input}
-            onChange={handleChange}
-            placeholder="3-10 years"
-          />
-        </p>
-        <p className={s.parrafo}>
-          <label for="POST-weight">Weight:</label>
-          <input
-            id="POST-weight"
-            type="text"
-            name="weight"
-            className={s.input}
-            onChange={handleChange}
-            placeholder="2-10 kg"
-          />
-        </p>
-        <p className={s.parrafo}>
-          <label for="POST-height">Height:</label>
-          <input
-            id="POST-height"
-            type="text"
-            name="height"
-            className={s.input}
-            onChange={handleChange}
-            placeholder="30-40 cm"
-          />
-        </p>
-        <p className={s.parrafo}>
-          <label for="POST-img">Image:</label>
-          <input
-            id="POST-img"
-            type="text"
-            name="img"
-            placeholder="www.... your image url route"
-            className={s.input}
-            onChange={handleChange}
-          />
-        </p>
-        <p className={s.parrafo}>
-          <input type="submit" value="Create" />
-        </p>
-      </form>
+          <div className={s.parrafo}>
+            {data.tempers?.length === 0 ? (
+              <div></div>
+            ) : (
+              <div>
+                {data.tempers?.map((t, i) => {
+                  return (
+                    <div>
+                      <div key={i}>{t}</div>
+                      <button onClick={handleDelete} id={i}>
+                        x
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+          <p className={s.parrafo}>
+            <input type="submit" value="Create" />
+          </p>
+        </form>
+        <img className={s.img} src={data.img} alt="Not Found" />
+      </div>
     </div>
   );
 };
 
-//name: life_span: weight: height: img:
+export const mapStateToProps = (state) => {
+  return {
+    temperaments: state.temperaments,
+  };
+};
 
-export default CreateBreed;
+// export const mapDispatchToProps = (dispatch) => {
+//   return {
+//     setFilter: (value) => dispatch(actionCreators.setFilter(value)),
+//     getBreeds: (value) => dispatch(actionCreators.getBreeds(value)),
+//     deleteTemper: () => dispatch(actionCreators.deleteTemper()),
+//   };
+// };
+
+export default connect(mapStateToProps, null)(CreateBreed);

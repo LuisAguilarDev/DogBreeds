@@ -33,4 +33,11 @@
 
 .top {
   margin-top: 24px;
+  display: flex;
+}
+
+.img {
+  max-width: 35vw;
+  max-height: 35vh;
+  margin: auto;
 }

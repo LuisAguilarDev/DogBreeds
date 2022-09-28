@@ -8,19 +8,19 @@ const Dropbtn = (props) => {
   const values2 = ["ASC", "DESC"];
   function handleChange(e) {
     let index = values.findIndex((element) => element === e.target.value);
-    console.log(index);
     props.setFilter({
+      ...props.filter,
       order: values2[index],
       orderColumn: "name",
       page: props.page.actualPage,
     });
     props.getBreeds({
+      ...props.filter,
       order: values2[index],
       orderColumn: "name",
       page: props.page.actualPage,
     });
   }
-  console.log(props.filter);
   return (
     <div className={s.display}>
       <form>
