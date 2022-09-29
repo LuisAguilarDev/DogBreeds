@@ -72,3 +72,13 @@ export function deleteTemper() {
     dispatch({ type: "deleteTemper", payload: null });
   };
 }
+export function createBreed(breed) {
+  console.log("soy el dispatch");
+  return function (dispatch) {
+    axios
+      .post(`http://localhost:3001/dogs/create`, breed)
+      .then((x) => console.log(x))
+      .catch((error) => console.log(error));
+    dispatch({ type: "createBreed", payload: null });
+  };
+}

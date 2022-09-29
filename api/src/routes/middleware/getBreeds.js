@@ -13,6 +13,26 @@ router.get("/:id", async (req, res, next) => {
   res.status(200).json(answer);
 });
 
+router.post("/create", async (req, res, next) => {
+  console.log(req.body);
+  let tempers = req.body.tempers;
+  console.log(tempers);
+  const newBreed = {
+    name: req.body.name,
+    weight: req.body.weight + " kg",
+    height: req.body.height + " cm",
+    life_span: req.body.life_span,
+    img: req.body.img,
+    createdByUser: req.body.createdByUser,
+  };
+
+  const created = await Breed.create(newBreed);
+  tempers.forEach((t) => {
+    created.setTempers({ name: t });
+  });
+  console.log(created);
+});
+
 router.get("/", async (req, res, next) => {
   if (
     !req.query.temper ||

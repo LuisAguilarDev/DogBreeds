@@ -19,18 +19,18 @@ const CreateBreed = (props) => {
     tempers: [],
     img: imgSrc[Math.floor(Math.random() * 6)],
   });
-  console.log(data);
+
   function handleChange(e) {
     setData({ ...data, [e.target.name]: e.target.value });
   }
   function handleSubmit(e) {
     e.preventDefault();
+    props.createBreed(data);
   }
   function handleChangeTemper(e) {
     let obj = { ...data };
     let obj2 = { ...obj, tempers: [...obj.tempers, e.target.value] };
     setData(obj2);
-    console.log(obj2);
   }
   function handleDelete(e) {
     let filtered = data.tempers;
@@ -94,7 +94,7 @@ const CreateBreed = (props) => {
             <select className={s.select} onChange={handleChangeTemper}>
               {props.temperaments.map((o, i) => {
                 return (
-                  <option name={o.name} key={i} value={o.name}>
+                  <option id={i} name={o.name} key={i} value={o.name}>
                     {o.name}
                   </option>
                 );
@@ -135,12 +135,12 @@ export const mapStateToProps = (state) => {
   };
 };
 
-// export const mapDispatchToProps = (dispatch) => {
-//   return {
-//     setFilter: (value) => dispatch(actionCreators.setFilter(value)),
-//     getBreeds: (value) => dispatch(actionCreators.getBreeds(value)),
-//     deleteTemper: () => dispatch(actionCreators.deleteTemper()),
-//   };
-// };
+export const mapDispatchToProps = (dispatch) => {
+  return {
+    setFilter: (value) => dispatch(actionCreators.setFilter(value)),
+    getBreeds: (value) => dispatch(actionCreators.getBreeds(value)),
+    createBreed: (breed) => dispatch(actionCreators.createBreed(breed)),
+  };
+};
 
-export default connect(mapStateToProps, null)(CreateBreed);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateBreed);
