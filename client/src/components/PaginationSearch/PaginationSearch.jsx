@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../redux/actions/index.js";
 import s from "./PaginationSearch.module.css";
@@ -6,6 +6,8 @@ import s from "./PaginationSearch.module.css";
 const PaginationSearch = (props) => {
   let actualPage = props.pageSearch;
   let lastPage = Math.ceil(props.search.length / 8);
+  useEffect(() => console.log(), [props.search]);
+
   let siblings = 1;
   function onClickNext(e) {
     props.setPageSearch(actualPage + 1);
@@ -21,7 +23,7 @@ const PaginationSearch = (props) => {
   }
   return (
     <div className={s.panel}>
-      {lastPage === 1 ? (
+      {lastPage <= 1 ? (
         <div></div>
       ) : (
         <div className={s.pagination}>
@@ -69,7 +71,8 @@ const PaginationSearch = (props) => {
 export const mapStateToProps = (state) => {
   return {
     pageSearch: state.pageSearch,
-    search: state.search,
+    search: state.searchFS,
+    page: state.page,
   };
 };
 

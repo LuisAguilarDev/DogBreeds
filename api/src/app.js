@@ -13,7 +13,7 @@ const server = express();
 server.name = "API";
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
+server.use(express.json());
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use((req, res, next) => {
@@ -65,6 +65,7 @@ server.use(async (req, res, next) => {
             height: b.weight.imperial + " cm",
             life_span: b.life_span,
             img: b.image.url,
+            createdByUser: false,
           };
           BreedsObj.push(newBreed);
         });
@@ -111,6 +112,10 @@ server.use((err, req, res, next) => {
   const message = err.message || err;
   console.error(err);
   res.status(status).send(message);
+});
+
+server.use((req, res) => {
+  res.status(404).json({ error: "Not Found" });
 });
 
 module.exports = server;

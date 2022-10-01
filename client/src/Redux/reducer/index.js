@@ -1,6 +1,7 @@
 const initialState = {
   breeds: [],
   search: [],
+  searchFS: [],
   createdBreeds: [],
   pages: 0,
   temperaments: [],
@@ -30,7 +31,7 @@ export default function rootReducer(state = initialState, action) {
     return {
       ...state,
       search: action.payload,
-      redirect: true,
+      searchFS: action.payload,
     };
   }
   if (action.type === "getTemperaments") {
@@ -51,7 +52,28 @@ export default function rootReducer(state = initialState, action) {
       pageSearch: action.payload,
     };
   }
+  if (action.type === "sortSearch") {
+    return {
+      ...state,
+      searchFS: action.payload,
+    };
+  }
+  if (action.type === "filterSearch") {
+    return {
+      ...state,
+      searchFS: action.payload,
+      pageSearch: 1,
+    };
+  }
+  if (action.type === "filterByUser") {
+    return {
+      ...state,
+      searchFS: action.payload,
+      pageSearch: 1,
+    };
+  }
   if (action.type === "setFilter") {
+    console.log("entre a actualizar la pagina");
     return {
       ...state,
       filter: { ...state.filter, ...action.payload },
@@ -62,6 +84,13 @@ export default function rootReducer(state = initialState, action) {
     return {
       ...state,
       filter: { ...rest },
+    };
+  }
+  if (action.type === "setBase") {
+    return {
+      ...state,
+      searchFS: action.payload,
+      pages: { lastPage: Math.ceil(action.payload.length / 8), actualPage: 1 },
     };
   }
   return state;

@@ -1,9 +1,12 @@
-import React from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../redux/actions/index.js";
 import s from "./Pagination.module.css";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const Pagination = (props) => {
+  let { search } = useParams();
+  useEffect(() => console.log(), [search]);
   let actualPage = parseInt(props.pages.actualPage);
   let lastPage = props.pages.lastPage;
   let siblings = 1;
@@ -21,7 +24,7 @@ const Pagination = (props) => {
   }
   return (
     <div className={s.panel}>
-      {lastPage === 1 ? (
+      {lastPage <= 1 ? (
         <div></div>
       ) : (
         <div className={s.pagination}>
@@ -70,6 +73,7 @@ export const mapStateToProps = (state) => {
   return {
     pages: state.pages,
     filter: state.filter,
+    searchFS: state.searchFS,
   };
 };
 

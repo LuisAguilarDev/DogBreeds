@@ -6,6 +6,7 @@ import s from "./Breeds.module.css";
 import Pagination from "../Pagination/Pagination.jsx";
 import { useParams } from "react-router-dom";
 import PaginationSearch from "../PaginationSearch/PaginationSearch.jsx";
+import { useEffect } from "react";
 
 const Breeds = (props) => {
   let { search } = useParams();
@@ -15,8 +16,11 @@ const Breeds = (props) => {
   } else {
     search = false;
   }
+
+  useEffect(() => console.log, [props.pageSearch]);
   let min = props.pageSearch * 8 - 8;
   let max = min + 8;
+
   return (
     <div>
       <div className={s.view}>
@@ -34,7 +38,7 @@ const Breeds = (props) => {
                     />
                   );
                 })
-              : props.search?.slice(min, max)?.map((b) => {
+              : props.searchFS?.slice(min, max)?.map((b) => {
                   return (
                     <BreedCard
                       key={b.id}
@@ -56,8 +60,9 @@ const Breeds = (props) => {
 export const mapStateToProps = (state) => {
   return {
     breeds: state.breeds,
-    search: state.search,
+    searchFS: state.searchFS,
     pageSearch: state.pageSearch,
+    loading: state.loading,
   };
 };
 

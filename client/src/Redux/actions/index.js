@@ -36,14 +36,12 @@ export function sortAlphabeticallyAZ(data) {
   };
 }
 
-export function search(raza_perro, filter) {
-  console.log(filter);
+export function search(raza_perro) {
   return function (dispatch) {
     axios
       .get(`http://localhost:3001/dogs?name=${raza_perro}`)
       .then(async (response) => {
         const apiResponse = await response.data;
-        console.log(apiResponse);
         dispatch({ type: "search", payload: apiResponse });
       });
   };
@@ -80,5 +78,65 @@ export function createBreed(breed) {
       .then((x) => console.log(x))
       .catch((error) => console.log(error));
     dispatch({ type: "createBreed", payload: null });
+  };
+}
+export function sortSearch(data) {
+  let order = data.pop();
+  let sorted;
+  if (order === "ASC") {
+    sorted = data.sort(function (a, b) {
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+  if (order === "DESC") {
+    sorted = data.sort(function (a, b) {
+      if (a.name < b.name) {
+        return 1;
+      }
+      if (a.name > b.name) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+  }
+  return function (dispatch) {
+    dispatch({ type: "sortSearch", payload: sorted });
+  };
+}
+
+export function filterSearch(data, temper) {
+  let dataFiltered = data.filter((x) => {
+    return x.tempers.some((temperamento) => temperamento.name === temper);
+  });
+  return function (dispatch) {
+    dispatch({ type: "filterSearch", payload: dataFiltered });
+  };
+}
+
+export function setBase(data) {
+  return function (dispatch) {
+    dispatch({ type: "setBase", payload: data });
+  };
+}
+
+export function filterCreatedByUser(data) {
+  return function (dispatch) {
+    dispatch({ type: "setBase", payload: data });
+  };
+}
+
+export function filterByUser(data, parametro) {
+  let dataFiltered = data.filter((x) => {
+    return x.createdByUser === parametro;
+  });
+  return function (dispatch) {
+    dispatch({ type: "filterByUser", payload: dataFiltered });
   };
 }

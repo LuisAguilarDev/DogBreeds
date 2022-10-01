@@ -14,9 +14,9 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/create", async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   let tempers = req.body.tempers;
-  console.log(tempers);
+  // console.log(tempers);
   const newBreed = {
     name: req.body.name,
     weight: req.body.weight + " kg",
@@ -26,11 +26,46 @@ router.post("/create", async (req, res, next) => {
     createdByUser: req.body.createdByUser,
   };
 
+  console.log(newBreed);
   const created = await Breed.create(newBreed);
-  tempers.forEach((t) => {
-    created.setTempers({ name: t });
+  tempers.forEach(async (t) => {
+    let busqueda = await Temper.findAll({
+      where: {
+        name: t,
+      },
+    });
+
+    created.setTempers(busqueda[0].toJSON().id);
   });
-  console.log(created);
+});
+
+router.get("/", async (req, res, next) => {
+  if (!req.query.createdBy) return next();
+  let parameter;
+  if (req.query.createdBy === "API") {
+    parameter = false;
+  }
+  if (req.query.createdBy === "Created By Users") {
+    parameter = true;
+  }
+  console.log(req.query);
+  let page = req.query.page || 1;
+  let offsetIndex = 8 * (page - 1);
+  let total = await Breed.count({
+    where: { createdByUser: parameter },
+    include: Temper,
+    offset: offsetIndex,
+    limit: 8,
+  });
+  let answer = await Breed.findAll({
+    where: { createdByUser: parameter },
+    include: Temper,
+    offset: offsetIndex,
+    limit: 8,
+  });
+  let parsedAnswer = answer.map((b) => b.toJSON());
+  parsedAnswer.push({ lastPage: Math.ceil(total / 8), actualPage: page });
+  res.status(200).json(parsedAnswer);
 });
 
 router.get("/", async (req, res, next) => {
