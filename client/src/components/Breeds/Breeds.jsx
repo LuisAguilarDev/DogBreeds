@@ -22,37 +22,35 @@ const Breeds = (props) => {
   let max = min + 8;
 
   return (
-    <div>
-      <div className={s.view}>
-        <div className={s.panel}>
-          <div className={s.container}>
-            {search
-              ? props.breeds?.slice(0, 8)?.map((b) => {
-                  return (
-                    <BreedCard
-                      key={b.id}
-                      id={b.id}
-                      img={b.img}
-                      name={b.name}
-                      temper={b.tempers}
-                    />
-                  );
-                })
-              : props.searchFS?.slice(min, max)?.map((b) => {
-                  return (
-                    <BreedCard
-                      key={b.id}
-                      id={b.id}
-                      img={b.img}
-                      name={b.name}
-                      temper={b.tempers}
-                    />
-                  );
-                })}
-          </div>
-        </div>
-        <div>{search ? <Pagination /> : <PaginationSearch />}</div>
+    <div className={s.view}>
+      {/* <div className={s.panel}> */}
+      <div className={s.container}>
+        {search
+          ? props.breeds?.slice(0, 8)?.map((b) => {
+              return (
+                <BreedCard
+                  key={b.id}
+                  id={b.id}
+                  img={b.img}
+                  name={b.name}
+                  temper={b.tempers}
+                />
+              );
+            })
+          : props.searchFS?.slice(min, max)?.map((b) => {
+              return (
+                <BreedCard
+                  key={b.id}
+                  id={b.id}
+                  img={b.img}
+                  name={b.name}
+                  temper={b.tempers}
+                />
+              );
+            })}
       </div>
+      {/* </div> */}
+      <div>{search ? <Pagination /> : <PaginationSearch />}</div>
     </div>
   );
 };

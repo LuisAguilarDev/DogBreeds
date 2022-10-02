@@ -1,13 +1,9 @@
 .container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.panel {
+  display: grid;
+  gap: 1rem;
+  /* grid-auto-rows: 22rem; */
+  /* grid-template-columns: repeat(autofill, minmax(15rem, 1fr)); */
   width: 80vw;
-  margin-top: 24px;
-}
-
-.view {
-  max-width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }

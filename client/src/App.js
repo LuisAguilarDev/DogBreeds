@@ -9,16 +9,14 @@ require("dotenv").config({ path: "../../.env" });
 
 function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dogs" element={<GlobalContainer />} />
-        <Route path="CreateBreed" element={<CreateBreed />} />
-        <Route path="BreedDetail/:id" element={<BreedDetail />} />
-        <Route path="/:search" element={<GlobalContainer />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/dogs" element={<GlobalContainer />} />
+      <Route path="CreateBreed" element={<CreateBreed />} />
+      <Route path="BreedDetail/:id" element={<BreedDetail />} />
+      <Route path="/:search" element={<GlobalContainer />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 

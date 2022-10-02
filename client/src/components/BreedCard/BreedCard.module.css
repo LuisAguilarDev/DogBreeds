@@ -1,8 +1,10 @@
 .img {
   height: 260px;
-  width: 260px;
+  width: 100%;
+  max-width: 260px;
   border-radius: 8px;
   cursor: pointer;
+  object-fit: fill;
 }
 .textbox {
   background-color: #966f33;
@@ -17,7 +19,6 @@
 
 .cardcontainer {
   height: 50%;
-  width: 25%;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
