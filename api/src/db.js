@@ -2,15 +2,20 @@ require("dotenv").config({ path: "../../.env" });
 const { Sequelize, Op } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-data = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/dogbreeds`;
+// data = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/dogbreeds`;
+// `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/dogbreeds`,
 
-const sequelize = new Sequelize(
-  `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/dogbreeds`,
-  {
-    logging: false, // set to console.log to see the raw SQL queries
-    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  }
-);
+const sequelize = new Sequelize(process.env.DB_HOST, {
+  logging: false, // set to console.log to see the raw SQL queries
+  // native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, //you need this
+    },
+  },
+});
 
 const basename = path.basename(__filename);
 
