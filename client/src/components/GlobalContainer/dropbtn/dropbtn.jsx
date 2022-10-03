@@ -37,7 +37,7 @@ const Dropbtn = (props) => {
   }
   return (
     <div className={s.display}>
-      <form>
+      <div className={s.form}>
         <label className={s.displayName}>Ordenar alfabeticamente:</label>
         <select onChange={handleChange} className={s.select}>
           <option disabled>Selecccionar</option>
@@ -49,7 +49,7 @@ const Dropbtn = (props) => {
             );
           })}
         </select>
-      </form>
+      </div>
     </div>
   );
 };

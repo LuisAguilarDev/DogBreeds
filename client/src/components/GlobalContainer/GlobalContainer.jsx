@@ -20,7 +20,7 @@ const GlobalContainer = (props) => {
             <img className={s.img} src={jpg} alt="not Found" />
           </div>
         ) : (
-          <div>
+          <div className={s.secondpanel}>
             <Dropbtn />
             <Breeds />
           </div>

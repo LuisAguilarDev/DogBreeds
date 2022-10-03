@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Nav.module.css";
 import logo from "./../../assets/threedogs.png";
-import mg from "./../../assets/MG.png";
+import mg from "./../../assets/MG.svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -41,7 +41,7 @@ const Nav = (props) => {
           name="search"
           className={s.input}
           type="search"
-          placeholder="Search by Breed"
+          placeholder="Search by breed"
           aria-label="Search"
           onChange={handleChange}
         />

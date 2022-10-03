@@ -4,21 +4,30 @@
 }
 
 .display {
-  position: absolute;
   right: 0px;
-  background-color: #966f33;
   display: flex;
-  margin: 8px;
+  flex-direction: row-reverse;
+  margin-top: 48px;
+  margin-bottom: 32px;
   padding: 2px;
   border-radius: 10px;
+  margin-right: 56px;
 }
 
 .select {
   align-items: center;
-  margin-top: -80px;
+  width: 30%;
+  height: 40px;
+  border-radius: 8px;
+  padding-left: 16px;
 }
-
+/*padding de la flechita 16px*/
 .displayName {
   font-family: "Lato", sans-serif;
   font-weight: 700;
+  text-align: center;
+}
+.form {
+  display: flex;
+  justify-content: flex-end;
 }

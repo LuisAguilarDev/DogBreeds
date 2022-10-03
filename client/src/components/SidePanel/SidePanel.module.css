@@ -1,37 +1,54 @@
 .panel {
-  background-color: rgb(22, 153, 22);
-  width: 20vw;
-  min-height: 90vh;
-  max-height: 100vh;
+  background-color: #75c062;
+  width: 15vw;
+  min-height: 100vh;
 }
 
 .titlePrincipal {
-  color: white;
-  font-size: 24px;
+  color: black;
+  font-size: 14px;
   margin-left: 16px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: +1.5px;
+  margin-top: 24px;
+  padding-bottom: 24px;
 }
 
 .title {
-  color: white;
-  font-size: 16px;
+  color: black;
+  font-size: 14px;
   margin-left: 16px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: +1.5px;
-
+  padding-bottom: 24px;
   display: flex;
 }
 
 .select {
   margin-left: 24px;
+  width: 80%;
+  height: 40px;
+  border-radius: 8px;
+  padding-left: 16px;
+  padding-right: 8px;
 }
 
 .option {
-  color: white;
-  font-weight: 400;
+  color: black;
+  font-weight: 600;
   letter-spacing: +1.5px;
   margin-left: 24px;
+  padding: 8px;
+  font-size: 14px;
+}
+.optioninput {
+  padding-left: 16px;
+}
+
+/*seleccionar flechita y padding-left 16px*/
+
+.options {
+  padding-bottom: 24px;
 }
 
 .option:hover {
@@ -45,7 +62,6 @@
 }
 
 button {
-  background-color: #966f33;
   margin-right: 8vw;
   margin-top: 4px;
 }

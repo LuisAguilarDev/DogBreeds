@@ -108,7 +108,7 @@ const CreateBreed = (props) => {
               <div>
                 {data.tempers?.map((t, i) => {
                   return (
-                    <div>
+                    <div className={s.options}>
                       <div key={i}>{t}</div>
                       <button onClick={handleDelete} id={i}>
                         x

@@ -108,16 +108,18 @@ const SidePanel = (props) => {
         <div></div>
       ) : (
         <div>
-          <div className={s.title}>Por Fuente</div>
-          <div className={s.option} onClick={handleClickCreation} id={"API"}>
-            API
-          </div>
-          <div
-            className={s.option}
-            onClick={handleClickCreation}
-            id={"CreatedByUser"}
-          >
-            Created By Users
+          <div className={s.title}>By Source</div>
+          <div className={s.options}>
+            <div className={s.option} onClick={handleClickCreation} id={"API"}>
+              API
+            </div>
+            <div
+              className={s.option}
+              onClick={handleClickCreation}
+              id={"CreatedByUser"}
+            >
+              Created By Users
+            </div>
           </div>
         </div>
       )}
@@ -126,11 +128,16 @@ const SidePanel = (props) => {
           <div></div>
         ) : (
           <div>
-            <div className={s.title}>Filter By temperaments</div>
+            <div className={s.title}>By temperaments</div>
             <select className={s.select} onChange={handleChangeTemper}>
               {props.temperaments.map((o, i) => {
                 return (
-                  <option name={o.name} key={i} value={o.name}>
+                  <option
+                    className={s.optioninput}
+                    name={o.name}
+                    key={i}
+                    value={o.name}
+                  >
                     {o.name}
                   </option>
                 );
