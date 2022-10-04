@@ -68,10 +68,10 @@ const SidePanel = (props) => {
   }
   return (
     <div className={s.panel}>
-      <div className={s.titlePrincipal}>Filtrar</div>
+      <div className={s.titlePrincipal}>Filter</div>
       {Object.keys(filtros).length > 0 ? (
         <div>
-          <div className={s.title}>Filtros Aplicados</div>
+          <div className={s.title}>Filters applied</div>
           {filtros.createdBy ? (
             <div className={s.filters}>
               <div className={s.option}>Source: {filtros.createdBy}</div>
@@ -118,7 +118,7 @@ const SidePanel = (props) => {
               onClick={handleClickCreation}
               id={"CreatedByUser"}
             >
-              Created By Users
+              Created by users
             </div>
           </div>
         </div>
@@ -129,20 +129,23 @@ const SidePanel = (props) => {
         ) : (
           <div>
             <div className={s.title}>By temperaments</div>
-            <select className={s.select} onChange={handleChangeTemper}>
-              {props.temperaments.map((o, i) => {
-                return (
-                  <option
-                    className={s.optioninput}
-                    name={o.name}
-                    key={i}
-                    value={o.name}
-                  >
-                    {o.name}
-                  </option>
-                );
-              })}
-            </select>
+            <div className={s.father}>
+              <select className={s.select} onChange={handleChangeTemper}>
+                {props.temperaments.map((o, i) => {
+                  return (
+                    <option
+                      className={s.optioninput}
+                      name={o.name}
+                      key={i}
+                      value={o.name}
+                    >
+                      {o.name}
+                    </option>
+                  );
+                })}
+              </select>
+              <span className={s.customArrow}></span>
+            </div>
           </div>
         )}
       </div>

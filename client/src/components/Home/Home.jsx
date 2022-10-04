@@ -9,7 +9,7 @@ const Home = () => {
       <div className={s.padre}>
         <img className={s.img} src={img} alt="Not Found" />
 
-        <div className={s.entrar}>Entrar</div>
+        <div className={s.entrar}>Get in</div>
       </div>
     </Link>
   );

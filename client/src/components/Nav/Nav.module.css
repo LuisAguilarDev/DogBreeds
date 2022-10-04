@@ -9,9 +9,14 @@
 .img {
   width: 64px;
   height: 64px;
+  margin: 8px;
   border-radius: 8px;
-  padding: 8px;
 }
+
+.imgcontainer {
+  display: flex;
+}
+
 .logo {
   text-align: center;
   align-items: center;
@@ -22,9 +27,8 @@
 .input {
   width: 600px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
-  margin-left: -400px;
   padding-left: 24px;
 }
 .input::placeholder {
@@ -57,14 +61,12 @@
 }
 
 .iconcont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 38px;
   width: 38px;
-  border-radius: 0px 8px 8px 0px;
-  margin-top: 2px;
-  margin-left: 0px;
-  position: absolute;
-  border: none;
-  background-color: none;
+  border-radius: 8px;
 }
 
 .iconcont:hover {
@@ -73,7 +75,13 @@
 
 .icon {
   height: 32px;
-  color: white;
+  filter: invert(92%) sepia(96%) saturate(4453%) hue-rotate(183deg)
+    brightness(127%) contrast(93%);
+}
+.preset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 1425px) {

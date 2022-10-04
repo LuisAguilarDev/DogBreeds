@@ -23,6 +23,7 @@ const CreateBreed = (props) => {
   function handleChange(e) {
     setData({ ...data, [e.target.name]: e.target.value });
   }
+
   function handleSubmit(e) {
     e.preventDefault();
     props.createBreed(data);
@@ -43,8 +44,8 @@ const CreateBreed = (props) => {
       <NAV />
       <div className={s.top}>
         <form className={s.formPost} onSubmit={handleSubmit}>
-          <div className={s.title}>Create Your Own Breed</div>
-          <p className={s.parrafo}>
+          <div className={s.title}>Create your own breed</div>
+          <div className={s.labels}>
             <div>
               <label>Name:</label>
             </div>
@@ -57,71 +58,94 @@ const CreateBreed = (props) => {
                 placeholder="Enter the name of the breed"
               />
             </div>
-          </p>
-          <p className={s.parrafo}>
-            <label>Life span:</label>
-            <input
-              type="text"
-              name="life_span"
-              className={s.input}
-              onChange={handleChange}
-              placeholder="3-10 years"
-            />
-          </p>
-          <p className={s.parrafo}>
-            <label>Weight:</label>
-            <input
-              type="text"
-              name="weight"
-              className={s.input}
-              onChange={handleChange}
-              placeholder="2-10 kg"
-            />
-          </p>
-          <p className={s.parrafo}>
-            <label>Height:</label>
-            <input
-              type="text"
-              name="height"
-              className={s.input}
-              onChange={handleChange}
-              placeholder="30-40 cm"
-            />
-          </p>
-
-          <div>
-            <div className={s.title}>Add the temperaments</div>
-            <select className={s.select} onChange={handleChangeTemper}>
-              {props.temperaments.map((o, i) => {
-                return (
-                  <option id={i} name={o.name} key={i} value={o.name}>
-                    {o.name}
-                  </option>
-                );
-              })}
-            </select>
           </div>
-          <div className={s.parrafo}>
-            {data.tempers?.length === 0 ? (
-              <div></div>
-            ) : (
-              <div>
-                {data.tempers?.map((t, i) => {
+          <div className={s.labels}>
+            <label>Life span:</label>
+            <div className={s.labelsDouble}>
+              <div className={s.separador}>
+                <input
+                  type="text"
+                  name="life_span"
+                  className={s.inputDouble}
+                  onChange={handleChange}
+                  placeholder="3 - 10"
+                />
+              </div>
+              <div className={s.options}> years </div>
+            </div>
+          </div>
+          <div className={s.labels}>
+            <label>Weight:</label>
+            <div className={s.labelsDouble}>
+              <div className={s.separador}>
+                <input
+                  type="text"
+                  name="weight"
+                  className={s.inputDouble}
+                  onChange={handleChange}
+                  placeholder="2 - 10"
+                />
+              </div>
+              <div className={s.options}>kg</div>
+            </div>
+          </div>
+          <div className={s.labels}>
+            <label>Height:</label>
+            <div className={s.labelsDouble}>
+              <div className={s.separador}>
+                <input
+                  type="text"
+                  name="height"
+                  className={s.inputDouble}
+                  onChange={handleChange}
+                  placeholder="30 - 40"
+                />
+              </div>
+              <div className={s.options}>cm</div>
+            </div>
+          </div>
+
+          <div className={s.title}>Add the temperaments</div>
+          <div className={s.separator}>
+            <div>
+              <select className={s.select} onChange={handleChangeTemper}>
+                {props.temperaments.map((o, i) => {
                   return (
-                    <div className={s.options}>
-                      <div key={i}>{t}</div>
-                      <button onClick={handleDelete} id={i}>
-                        x
-                      </button>
-                    </div>
+                    <option id={i} name={o.name} key={i} value={o.name}>
+                      {o.name}
+                    </option>
                   );
                 })}
-              </div>
-            )}
+              </select>
+            </div>
+            <div>
+              {data.tempers?.length === 0 ? (
+                <div></div>
+              ) : (
+                <div className={s.container}>
+                  {data.tempers?.map((t, i) => {
+                    return (
+                      <div className={s.tempersStyle}>
+                        <div className={s.separator} key={i}>
+                          {t}
+                        </div>
+                        <button
+                          className={s.buttondelete}
+                          onClick={handleDelete}
+                          id={i}
+                        >
+                          x
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
-          <p className={s.parrafo}>
+          <div className={s.parrafo}>
             <input type="submit" value="Create" />
-          </p>
+          </div>
         </form>
         <img className={s.img} src={data.img} alt="Not Found" />
       </div>

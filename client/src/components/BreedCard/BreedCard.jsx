@@ -16,11 +16,11 @@ const BreedCard = (props) => {
         </Link>
       </div>
       <div className={s.textbox}>
-        <h2>{props.name}</h2>
+        <div className={s.title}>{props.name}</div>
         {text.length === 0 ? (
-          <h3>{defaultText}</h3>
+          <div className={s.tempertex}>{defaultText}</div>
         ) : (
-          <h3>{text.toString(",").trim() + "."}</h3>
+          <div className={s.tempertex}>{text.toString(",").trim() + "."}</div>
         )}
       </div>
     </div>

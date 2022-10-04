@@ -2,7 +2,7 @@
   display: flex;
   justify-content: flex-end;
   font-size: 12px;
-  margin: 8px;
+  margin-right: 56px;
 }
 
 .active {
@@ -11,6 +11,7 @@
   font-size: 12px;
   padding: 4px;
   margin: 4px;
+  background-color: #75c062;
 }
 
 .notactive {
@@ -21,10 +22,15 @@
   color: black;
 }
 .notactive:hover {
-  background-color: black;
-  color: #75c062;
+  background-color: #75c062;
+  color: white;
 }
 .panel {
   display: flex;
   flex-direction: row-reverse;
+}
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -2,7 +2,7 @@
   position: absolute;
   margin-top: 55vh;
   margin-left: 46vw;
-  background-color: #966f33;
+  background-color: #75c062;
   font-family: "Lato", sans-serif;
   width: 5vw;
   justify-content: center;
@@ -10,16 +10,15 @@
   font-weight: 900;
   display: flex;
   padding: 2.4vh;
-  border-color: black;
-  border-width: 20px;
+  border-color: #198000;
+  border-width: 10px;
   border-style: solid;
   border-radius: 10px 10px;
   font-size: 2.5vh;
   text-decoration: none;
 }
 .entrar:hover {
-  background-color: white;
-  color: #966f33;
+  color: yellow;
   cursor: pointer;
 }
 .padre {

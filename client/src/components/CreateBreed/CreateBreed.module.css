@@ -23,20 +23,27 @@
 .parrafo {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   color: black;
   font-size: 20px;
+  align-items: center;
 }
 
 .input {
   width: 550px;
+  height: 40px;
 }
 
 .top {
   margin-top: 56px;
   display: flex;
 }
-
+.labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  align-items: center;
+}
 .img {
   max-width: 35vw;
   max-height: 35vh;
@@ -44,5 +51,46 @@
 }
 
 .options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.tempersStyle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  margin-left: 16px;
+  margin-right: 350px;
+  padding-left: 8px;
+  padding-right: 16px;
+}
+.separator {
+  display: flex;
+  flex-direction: row;
+  padding: 4px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.buttondelete {
+  margin: 0;
+  padding: 4px;
+}
+
+.inputDouble {
+  width: 150px;
+  height: 40px;
+}
+.labelsDouble {
+  width: 550px;
+  display: flex;
+  padding: 8px;
+}
+.separador {
   display: flex;
 }

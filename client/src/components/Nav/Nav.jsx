@@ -29,25 +29,25 @@ const Nav = (props) => {
   return (
     <nav className={s.nav}>
       <div className={s.logo}>
-        <div>
+        <div className={s.imgcontainer}>
           <img className={s.img} src={logo} alt="Not Found" />
         </div>
         <div>
           <h6 className={s.pagename}>Dog Breeds</h6>
         </div>
       </div>
-      <div>
+      <div className={s.preset}>
         <input
           name="search"
           className={s.input}
-          type="search"
           placeholder="Search by breed"
           aria-label="Search"
+          onKeyDown={handleClick}
           onChange={handleChange}
         />
-        <button onClick={handleClick} type="input" className={s.iconcont}>
+        <div onClick={handleClick} type="input" className={s.iconcont}>
           <img className={s.icon} src={mg} alt="Not Found" />
-        </button>
+        </div>
       </div>
       <div className={s.links}>
         <Link to="/dogs" className={s.home}>

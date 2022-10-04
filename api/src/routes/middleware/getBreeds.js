@@ -28,15 +28,17 @@ router.post("/create", async (req, res, next) => {
 
   console.log(newBreed);
   const created = await Breed.create(newBreed);
-  tempers.forEach(async (t) => {
-    let busqueda = await Temper.findAll({
-      where: {
-        name: t,
-      },
-    });
+  if (!(tempers.length === 0)) {
+    tempers.forEach(async (t) => {
+      let busqueda = await Temper.findAll({
+        where: {
+          name: t,
+        },
+      });
 
-    created.setTempers(busqueda[0].toJSON().id);
-  });
+      created.setTempers(busqueda[0].toJSON().id);
+    });
+  }
 });
 
 router.get("/", async (req, res, next) => {

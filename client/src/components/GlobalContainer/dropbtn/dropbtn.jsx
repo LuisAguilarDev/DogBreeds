@@ -38,9 +38,11 @@ const Dropbtn = (props) => {
   return (
     <div className={s.display}>
       <div className={s.form}>
-        <label className={s.displayName}>Ordenar alfabeticamente:</label>
+        <div className={s.displayName}>Order alphabetically:</div>
         <select onChange={handleChange} className={s.select}>
-          <option disabled>Selecccionar</option>
+          <option selected disabled>
+            Selecccionar
+          </option>
           {values.map((o, i) => {
             return (
               <option name={o} key={i} id={i} value={o}>
@@ -49,6 +51,7 @@ const Dropbtn = (props) => {
             );
           })}
         </select>
+        <span class={s.customArrow}></span>
       </div>
     </div>
   );
