@@ -4,6 +4,7 @@ const { Breed, Temper, Op } = require("./../../db");
 const router = Router();
 
 router.get("/:id", async (req, res, next) => {
+  if (!req.params.id) return;
   let answer = await Breed.findAll({
     where: {
       id: req.params.id,
