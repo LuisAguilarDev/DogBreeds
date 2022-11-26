@@ -6,7 +6,8 @@ export function getBreeds(filter) {
   for (const prop in filter) {
     back = back + `${prop}=${filter[prop]}&`;
   }
-  let requestUrl = `http://localhost:3001/dogs` + back.slice(0, -1);
+  let requestUrl =
+    `https://dogbreeds-production.up.railway.app/dogs` + back.slice(0, -1);
   console.log(requestUrl);
   return function (dispatch) {
     axios.get(requestUrl).then(async (response) => {
@@ -18,7 +19,7 @@ export function getBreeds(filter) {
 }
 
 export function getByID(id) {
-  let requestUrl = `http://localhost:3001/dogs/${id}`;
+  let requestUrl = `https://dogbreeds-production.up.railway.app/dogs/${id}`;
   return function (dispatch) {
     axios.get(requestUrl).then(async (response) => {
       // axios.get(requestUrl, [headers]).then(async (response) => {
@@ -39,7 +40,9 @@ export function sortAlphabeticallyAZ(data) {
 export function search(raza_perro) {
   return function (dispatch) {
     axios
-      .get(`http://localhost:3001/dogs?name=${raza_perro}`)
+      .get(
+        `https://dogbreeds-production.up.railway.app/dogs?name=${raza_perro}`
+      )
       .then(async (response) => {
         const apiResponse = await response.data;
         dispatch({ type: "search", payload: apiResponse });
@@ -49,10 +52,12 @@ export function search(raza_perro) {
 
 export function getTemperaments() {
   return function (dispatch) {
-    axios.get(`http://localhost:3001/temperaments`).then(async (response) => {
-      const apiResponse = await response.data;
-      dispatch({ type: "getTemperaments", payload: apiResponse });
-    });
+    axios
+      .get(`https://dogbreeds-production.up.railway.app/temperaments`)
+      .then(async (response) => {
+        const apiResponse = await response.data;
+        dispatch({ type: "getTemperaments", payload: apiResponse });
+      });
   };
 }
 export function setFilter(filter) {
@@ -74,7 +79,7 @@ export function createBreed(breed) {
   console.log("soy el dispatch");
   return function (dispatch) {
     axios
-      .post(`http://localhost:3001/dogs/create`, breed)
+      .post(`https://dogbreeds-production.up.railway.app/dogs/create`, breed)
       .then((x) => console.log(x))
       .catch((error) => console.log(error));
     dispatch({ type: "createBreed", payload: null });
